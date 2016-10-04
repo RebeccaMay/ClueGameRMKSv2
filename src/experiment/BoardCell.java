@@ -1,5 +1,7 @@
 package experiment;
 
+import clueGame.DoorDirection;
+
 public class BoardCell {
 	private int row;
 	private int col;
@@ -16,5 +18,20 @@ public class BoardCell {
 	@Override
 	public String toString() {
 		return "BoardCell [row=" + row + ", col=" + col + "]";
+	}
+
+	public DoorDirection getDoorDirection() {
+		// TODO Auto-generated method stub
+		return DoorDirection.UP;
+	}
+
+	public boolean isDoorway() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public char getInitial() {
+		// TODO Auto-generated method stub
+		return '\0';
 	}
 }
