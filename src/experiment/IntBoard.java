@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import clueGame.BoardCell;
+
 public class IntBoard {
 	private Map<BoardCell, HashSet<BoardCell>> adjMtx;
 	private BoardCell[][] grid;

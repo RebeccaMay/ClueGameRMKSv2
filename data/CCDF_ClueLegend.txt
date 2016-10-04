@@ -1,0 +1,11 @@
+E, Entrance Hall, Card
+C, Courtyard, Card
+D, Dungeons, Card
+L, Lighthouse, Card
+T, Tower, Card
+K, Kitchen, Card
+B, Bedroom, Card
+S, Servants Quarters, Card
+G, Great Room, Card
+X, Closet, Other
+W, Walkway, Other

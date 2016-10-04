@@ -1,6 +1,4 @@
-package experiment;
-
-import clueGame.DoorDirection;
+package clueGame;
 
 public class BoardCell {
 	private int row;

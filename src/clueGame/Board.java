@@ -2,8 +2,6 @@ package clueGame;
 
 import java.util.Map;
 
-import experiment.BoardCell;
-
 public class Board {
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
