@@ -1,0 +1,10 @@
+We tested the room initals by testing the top left cell of some rooms (lighthouse, Kitchen, and Great room),
+and we tested other room initials by testing the bottom right cells of some other rooms (Great room again, Entrance Hall). 
+Lastly, we tested the room intials of our closet and walkways.
+
+We tested our doorways by simply counting every single doorway by iterating over the legend and using the isDoorway() function 
+to sum the total number
+
+In addition, we tested a right facing door in the lighthouse, a down facing door in the kitchen, a right facing door in the 
+tower, and an upward facing door in the dungeon. Finally, we tested that rooms that aren't doors to make sure they didn't think
+they were doors, and lastly we tested the walkway to make sure it wasnt a door.
