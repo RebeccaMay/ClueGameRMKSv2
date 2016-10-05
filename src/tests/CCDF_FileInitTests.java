@@ -86,9 +86,6 @@ public class CCDF_FileInitTests {
 		assertFalse(cell.isDoorway());		
 
 	}
-	// 
-	// CHECK ABOVE FOR CORRECTNESS!
-	//
 	
 	// Test that we have the correct number of doors
 	@Test
@@ -101,23 +98,23 @@ public class CCDF_FileInitTests {
 				if (cell.isDoorway())
 					numDoors++;
 			}
-		Assert.assertEquals(16, numDoors);
+		Assert.assertEquals(20, numDoors);
 	}
 
 	// Test a few room cells to ensure the room initial is correct.
 	@Test
 	public void testRoomInitials() {
 		// Test first cell in room
-		assertEquals('C', board.getCellAt(0, 0).getInitial());
-		assertEquals('R', board.getCellAt(4, 8).getInitial());
-		assertEquals('B', board.getCellAt(9, 0).getInitial());
+		assertEquals('L', board.getCellAt(0, 0).getInitial());
+		assertEquals('K', board.getCellAt(7, 0).getInitial());
+		assertEquals('G', board.getCellAt(14, 19).getInitial());
 		// Test last cell in room
-		assertEquals('O', board.getCellAt(21, 22).getInitial());
-		assertEquals('K', board.getCellAt(21, 0).getInitial());
+		assertEquals('G', board.getCellAt(21, 22).getInitial());
+		assertEquals('E', board.getCellAt(21, 16).getInitial());
 		// Test a walkway
-		assertEquals('W', board.getCellAt(0, 5).getInitial());
+		assertEquals('W', board.getCellAt(12, 0).getInitial());
 		// Test the closet
-		assertEquals('X', board.getCellAt(9,13).getInitial());
+		assertEquals('X', board.getCellAt(16,5).getInitial());
 	}
 	
 
