@@ -25,7 +25,7 @@ public class IntBoard {
 		{
 			for (int j = 0; j < grid[i].length; j++)
 			{
-				grid[i][j] = new BoardCell(i,j);
+				grid[i][j] = new BoardCell(i,j, null);
 			}
 		}
 		calcAdjacencies();

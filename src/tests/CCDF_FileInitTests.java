@@ -32,12 +32,14 @@ public class CCDF_FileInitTests {
 	
 	@BeforeClass
 	public static void setUp() {
+		System.out.println("Setup");
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("CCDF_ClueLayout.csv", "CCDF_ClueLegend.txt");		
+		board.setConfigFiles("data/CCDF_ClueLayout.csv", "data/CCDF_ClueLegend.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
+		System.out.println("Setup Complete");
 	}
 	@Test
 	public void testRooms() {
