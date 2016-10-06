@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileNotFoundException;
 import java.util.Set;
 
 import org.junit.Before;
@@ -15,7 +16,7 @@ public class IntBoardTests {
 	private IntBoard board;
 	
 	@Before
-	public void setupBoard()
+	public void setupBoard() throws FileNotFoundException
 	{
 		board = new IntBoard(4);
 		//System.out.println(board);

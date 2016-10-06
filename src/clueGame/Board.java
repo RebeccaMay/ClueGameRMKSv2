@@ -11,18 +11,18 @@ import java.util.Set;
 public class Board {
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
-	
+
 	private Map<BoardCell, HashSet<BoardCell>> adjMtx;
 	private BoardCell[][] grid;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
-	
+
 	private String layoutFile = "";
 	private String legendFile = "";
-	
+
 	private int boardRows = 0;
 	private int boardCols = 0;
-	
+
 	private Map<Character, String> legend;
 
 	// ctor is private to ensure only one can be created
@@ -44,71 +44,9 @@ public class Board {
 	}
 
 	public void initialize() {
-
-		String layout = "";
 		try {
-			FileReader layoutReader;
-			layoutReader = new FileReader(layoutFile);
-			Scanner layoutIn = new Scanner(layoutReader);
-			boolean isFirstLine = true;
-			while (layoutIn.hasNextLine()) {
-				String line = layoutIn.nextLine();
-				if (isFirstLine)
-				{
-					String[] split = line.split(",");
-					boardCols = split.length;
-					isFirstLine = false;
-				}
-				else
-				{
-					layout = layout.concat(",");
-				}
-				layout = layout.concat(line);
-				
-				
-				boardRows++;
-			}	
-			layoutIn.close();
-			
-		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
-		
-		
-		grid = new BoardCell[boardRows][boardCols];
-		
-		String[] layoutArray = layout.split(",");
-		
-		
-		int counter = 0;
-		for (int i = 0; i < grid.length; i++)
-		{
-			for (int j = 0; j < grid[i].length; j++)
-			{
-				grid[i][j] = new BoardCell(i, j, layoutArray[counter]);
-				counter++;
-			}
-		}
-		
-		
-		try {
-			FileReader legendReader;
-			legendReader = new FileReader(legendFile);
-			Scanner legendIn = new Scanner(legendReader);
-			
-			while (legendIn.hasNextLine()) {
-				String line = legendIn.nextLine();
-				String[] legendStrings = line.split(", ");
-				
-				System.out.println(line);
-				System.out.println(legendStrings[1]);
-				
-				Character initial = legendStrings[0].charAt(0);
-				String roomName = legendStrings[1];
-				legend.put(initial, roomName);
-			}	
-			legendIn.close();
+			loadRoomConfig();
+			loadBoardConfig();
 
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -131,6 +69,73 @@ public class Board {
 
 	public BoardCell getCellAt(int i, int j) {
 		return grid[i][j];
+	}
+
+	public void loadRoomConfig() throws FileNotFoundException {
+		FileReader legendReader;
+		legendReader = new FileReader(legendFile);
+		Scanner legendIn = new Scanner(legendReader);
+
+		while (legendIn.hasNextLine()) {
+			String line = legendIn.nextLine();
+			String[] legendStrings = line.split(", ");
+
+			Character initial = legendStrings[0].charAt(0);
+			String roomName = legendStrings[1];
+			legend.put(initial, roomName);
+			if (!legendStrings[2].equals("Card") && !legendStrings[2].equals("Other"))
+			{
+				throw new BadConfigFormatException("Invalid room type (not 'Other' or 'Card') in " + legendFile + ": " + legendStrings[2]);
+			}
+		}
+		legendIn.close();
+
+	}
+
+	public void loadBoardConfig() throws FileNotFoundException {
+		String layout = "";
+		
+		FileReader layoutReader;
+		layoutReader = new FileReader(layoutFile);
+		Scanner layoutIn = new Scanner(layoutReader);
+		boolean isFirstLine = true;
+		while (layoutIn.hasNextLine()) {
+			String line = layoutIn.nextLine();
+			if (isFirstLine) {
+				String[] split = line.split(",");
+				boardCols = split.length;
+				isFirstLine = false;
+			} else {
+				if (boardCols == line.split(",").length)
+					layout = layout.concat(",");
+				else
+					throw new BadConfigFormatException("Incorrect column length in row " + boardRows);
+			}
+			layout = layout.concat(line);
+
+			boardRows++;
+		}
+		layoutIn.close();
+
+		grid = new BoardCell[boardRows][boardCols];
+
+		String[] layoutArray = layout.split(",");
+
+		int counter = 0;
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				if (legend.containsKey(layoutArray[counter].charAt(0)))
+				{
+					grid[i][j] = new BoardCell(i, j, layoutArray[counter]);
+					counter++;
+				}
+				else
+				{
+					throw new BadConfigFormatException(layoutArray[counter] + " is not in legend specified by " + legendFile);
+				}
+			}
+		}
+
 	}
 
 }

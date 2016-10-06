@@ -1,5 +1,6 @@
 package experiment;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class IntBoard {
 	private Set<BoardCell> targets;
 	private int boardSize;
 	
-	public IntBoard(int boardSize) {
+	public IntBoard(int boardSize) throws FileNotFoundException {
 		adjMtx = new HashMap<BoardCell, HashSet<BoardCell>>();
 		visited = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
