@@ -148,7 +148,7 @@ public class Board {
 	
 	public void calcAdjacencies()
 	{
-		for (int i = 0; i < grid.length; i++) // i iterates over columns
+		/*for (int i = 0; i < grid.length; i++) // i iterates over columns
 		{
 			for (int j = 0; j < grid[i].length; j++) // j iterates over each row in a column
 			{
@@ -181,11 +181,11 @@ public class Board {
 				// if row is ok, but col = 0, add (0, j + 1), (i - 1), (j - 1)
 				// etc
 			}
-		}
+		}*/
 	}
 
 	public void calcTargets(int cellRow, int cellCol, int pathLength) {
-		visited.add(getCellAt(cellRow,cellCol));
+		/* visited.add(getCellAt(cellRow,cellCol));
 		for (BoardCell cell : adjMtx.get(getCellAt(cellRow,cellCol)))
 		{
 			if (!visited.contains(cell))
@@ -202,6 +202,6 @@ public class Board {
 		}
 		visited.remove(getCellAt(cellRow,cellCol));
 		
+	*/
 	}
-
 }

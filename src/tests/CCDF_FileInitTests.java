@@ -75,7 +75,7 @@ public class CCDF_FileInitTests {
 		room = board.getCellAt(2, 19);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.LEFT, room.getDoorDirection());
-		room = board.getCellAt(14, 11);
+		room = board.getCellAt(14, 12);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.UP, room.getDoorDirection());
 		// Test that room pieces that aren't doors know it
