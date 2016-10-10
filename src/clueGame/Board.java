@@ -52,7 +52,7 @@ public class Board {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-
+		calcAdjacencies();
 	}
 
 	public Map<Character, String> getLegend() {
@@ -143,34 +143,53 @@ public class Board {
 	}
 
 	public Set<BoardCell> getTargets() {
-		return targets;
+		Set<BoardCell> tempTargets = targets;
+		targets.clear();
+		return tempTargets;
 	}
 	
 	public void calcAdjacencies()
 	{
-		/*for (int i = 0; i < grid.length; i++) // i iterates over columns
+		for (int i = 0; i < grid.length; i++) // i iterates over columns
 		{
 			for (int j = 0; j < grid[i].length; j++) // j iterates over each row in a column
 			{
 				HashSet<BoardCell> tempSet = new HashSet<BoardCell>();
+				
+				if ((grid[i][j].getInitial() != 'W') && (!grid[i][j].isDoorway()))
+				{
+					
+					adjMtx.put(grid[i][j], tempSet);
+					continue;
+				}
 				if (i != 0) 
 				{
-					tempSet.add(grid[i-1][j]);
+					if ((grid[i-1][j].getInitial() == 'W') || (grid[i-1][j].isDoorway() && (grid[i-1][j].getDoorDirection() == DoorDirection.DOWN)))
+					{
+						tempSet.add(grid[i-1][j]);
+					}
 				}
-				if (i != boardSize - 1) 
+				if (i != grid.length - 1) 
 				{
-					tempSet.add(grid[i+1][j]);
-
+					if ((grid[i+1][j].getInitial() == 'W') || (grid[i+1][j].isDoorway() && (grid[i+1][j].getDoorDirection() == DoorDirection.UP)))
+					{
+						tempSet.add(grid[i+1][j]);
+					}
 				}
 				if (j != 0) 
 				{
-					tempSet.add(grid[i][j-1]);
+					if ((grid[i][j-1].getInitial() == 'W') || (grid[i][j-1].isDoorway() && (grid[i][j-1].getDoorDirection() == DoorDirection.RIGHT)))
+					{
+						tempSet.add(grid[i][j-1]);
+					}
 
 				}
-				if (j != boardSize - 1) 
+				if (j != grid[i].length - 1) 
 				{
-					tempSet.add(grid[i][j+1]);
-
+					if ((grid[i][j+1].getInitial() == 'W') || (grid[i][j+1].isDoorway() && (grid[i][j+1].getDoorDirection() == DoorDirection.LEFT)))
+					{
+						tempSet.add(grid[i][j+1]);
+					}
 				}
 
 				adjMtx.put(grid[i][j], tempSet);
@@ -181,17 +200,17 @@ public class Board {
 				// if row is ok, but col = 0, add (0, j + 1), (i - 1), (j - 1)
 				// etc
 			}
-		}*/
+		}
 	}
 
 	public void calcTargets(int cellRow, int cellCol, int pathLength) {
-		/* visited.add(getCellAt(cellRow,cellCol));
+		visited.add(getCellAt(cellRow,cellCol));
 		for (BoardCell cell : adjMtx.get(getCellAt(cellRow,cellCol)))
 		{
 			if (!visited.contains(cell))
 			{
 				visited.add(cell);
-				if (pathLength == 1)
+				if (pathLength == 1 || cell.isDoorway())
 					targets.add(cell);
 				else
 					calcTargets(cell.getRow(), cell.getCol(), pathLength - 1);
@@ -201,7 +220,5 @@ public class Board {
 			
 		}
 		visited.remove(getCellAt(cellRow,cellCol));
-		
-	*/
 	}
 }
