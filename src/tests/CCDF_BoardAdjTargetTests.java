@@ -117,10 +117,11 @@ public class CCDF_BoardAdjTargetTests {
 	@Test
 	public void testAdjacencyWalkways()
 	{
-		// Test on top edge of board, just one walkway piece
+		// Test on top edge of board. We'll have two cells in the adj list since there's also a door on the top edge
 		Set<BoardCell> testList = board.getAdjList(0, 6);
 		assertTrue(testList.contains(board.getCellAt(1, 6)));
-		assertEquals(1, testList.size());
+		assertTrue(testList.contains(board.getCellAt(0, 7)));
+		assertEquals(2, testList.size());
 		
 		// Test on left edge of board, three walkway pieces
 		testList = board.getAdjList(5, 0);
@@ -272,7 +273,7 @@ public class CCDF_BoardAdjTargetTests {
 	{
 		board.calcTargets(12, 11, 3);
 		Set<BoardCell> targets= board.getTargets();
-		assertEquals(12, targets.size());
+		assertEquals(14, targets.size());
 
 		// staying on the walkways
 		assertTrue(targets.contains(board.getCellAt(12, 8)));

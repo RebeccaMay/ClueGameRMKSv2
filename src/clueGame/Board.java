@@ -143,9 +143,7 @@ public class Board {
 	}
 
 	public Set<BoardCell> getTargets() {
-		Set<BoardCell> tempTargets = targets;
-		targets.clear();
-		return tempTargets;
+		return targets;
 	}
 	
 	public void calcAdjacencies()
@@ -204,7 +202,13 @@ public class Board {
 	}
 
 	public void calcTargets(int cellRow, int cellCol, int pathLength) {
+		visited.clear();
+		targets.clear();
 		visited.add(getCellAt(cellRow,cellCol));
+		findAllTargets(cellRow,cellCol, pathLength);
+	}
+	
+	public void findAllTargets(int cellRow, int cellCol, int pathLength) {
 		for (BoardCell cell : adjMtx.get(getCellAt(cellRow,cellCol)))
 		{
 			if (!visited.contains(cell))
@@ -213,12 +217,11 @@ public class Board {
 				if (pathLength == 1 || cell.isDoorway())
 					targets.add(cell);
 				else
-					calcTargets(cell.getRow(), cell.getCol(), pathLength - 1);
+					findAllTargets(cell.getRow(), cell.getCol(), pathLength - 1);
 				
 				visited.remove(cell);
 			}
 			
 		}
-		visited.remove(getCellAt(cellRow,cellCol));
 	}
 }
