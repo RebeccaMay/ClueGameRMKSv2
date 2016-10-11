@@ -117,7 +117,8 @@ public class CCDF_BoardAdjTargetTests {
 	@Test
 	public void testAdjacencyWalkways()
 	{
-		// Test on top edge of board. We'll have two cells in the adj list since there's also a door on the top edge
+		// Test on top edge of board. We'll have two cells in the adj list since there's also a door on the top edge.
+		// There's no way to avoid this, because both of our walkways on the top edge have a door adjacent
 		Set<BoardCell> testList = board.getAdjList(0, 6);
 		assertTrue(testList.contains(board.getCellAt(1, 6)));
 		assertTrue(testList.contains(board.getCellAt(0, 7)));
