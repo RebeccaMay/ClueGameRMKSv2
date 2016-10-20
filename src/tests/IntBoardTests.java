@@ -19,7 +19,6 @@ public class IntBoardTests {
 	public void setupBoard() throws FileNotFoundException
 	{
 		board = new IntBoard(4);
-		//System.out.println(board);
 	}
 
 	/*
