@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
@@ -17,8 +18,8 @@ import javafx.scene.paint.Color;
 
 public class gameSetupTests {
 	private static Board board;
-	@Before
-	public void setUp(){
+	@BeforeClass
+	public static void setUp(){
 		// Board is singleton, get the only instance and initialize it		
 				board = Board.getInstance();
 				board.setConfigFiles("data/ClueLayout.csv", "data/ClueLegend.txt");		
@@ -57,7 +58,7 @@ public class gameSetupTests {
 		
 	}
 	//*/
-	/*
+	///*
 	@Test
 	public void loadCardTest(){
 		//Tests to assure that the deck contains the correct total number of cards
@@ -76,5 +77,5 @@ public class gameSetupTests {
 		assertEquals("Jupiter", testDeck.get(2).get(4).getCardName());
 	
 	}
-*/
+//*/
 }
