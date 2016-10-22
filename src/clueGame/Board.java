@@ -16,10 +16,11 @@ public class Board {
 	private BoardCell[][] grid;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
-
+	private Set<Card> fullDeck = new HashSet<Card>();
+	private Set<Player> people = new HashSet<Player>();
 	private String layoutFile = "";
 	private String legendFile = "";
-
+	private String cardFile = "";
 	private int boardRows = 0;
 	private int boardCols = 0;
 
@@ -42,11 +43,16 @@ public class Board {
 		layoutFile = layout;
 		legendFile = legend;
 	}
+	
+	public void setCardFile(String card){
+		cardFile = card;
+	}
 
 	public void initialize() {
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
+			loadCardConfig();
 
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -137,6 +143,10 @@ public class Board {
 		}
 
 	}
+	
+	public void loadCardConfig() throws FileNotFoundException {
+		
+	}
 
 	public Set<BoardCell> getAdjList(int cellRow, int cellCol) {
 		return adjMtx.get(getCellAt(cellRow,cellCol));
@@ -223,5 +233,13 @@ public class Board {
 			}
 			
 		}
+	}
+	
+	public Set<Card> getFullDeck(){
+		return fullDeck;
+	}
+	
+	public Set<Player> getPeople(){
+		return people;
 	}
 }
