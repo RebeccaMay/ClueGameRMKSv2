@@ -29,7 +29,6 @@ public class gameSetupTests {
 	}
 	
 	
-	///*	
 	@Test
 	public void loadPeopleTest(){
 		
@@ -57,8 +56,7 @@ public class gameSetupTests {
 		//assertEquals(Color.RED, testPlayer.getPlayerColor());
 		
 	}
-	//*/
-	///*
+
 	@Test
 	public void loadCardTest(){
 		//Tests to assure that the deck contains the correct total number of cards
@@ -77,5 +75,5 @@ public class gameSetupTests {
 		assertEquals("Jupiter", testDeck.get(2).get(4).getCardName());
 	
 	}
-//*/
+
 }

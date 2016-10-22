@@ -35,6 +35,7 @@ public class Board {
 	private Player computerplayer3;
 	private Player computerplayer4;
 	private Player computerplayer5;
+	private int numPlayers = 5; //will change depending on how many computer players the user wants to interact with
 	private Map<Character, String> legend;
 
 	// ctor is private to ensure only one can be created
