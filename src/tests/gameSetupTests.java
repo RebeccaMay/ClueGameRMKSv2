@@ -27,24 +27,8 @@ public class gameSetupTests {
 				board.initialize();
 	}
 	
-	@Test
-	public void loadCardTest(){
-		//Tests to assure that the deck contains the correct total number of cards
-		
-		ArrayList<ArrayList<Card>> testDeck = new ArrayList<ArrayList<Card>>();
-		assertEquals(3, testDeck.size());
-		ArrayList<Card> testPeople = testDeck.get(0); //Makes array of just people cards
-		assertEquals(6, testPeople.size()); 			// Makes sure that there are the correct number of people cards
-		ArrayList<Card> testWeapons = testDeck.get(1); //Makes array of just weapon cards
-		assertEquals(6, testWeapons.size());			//Makes sure that there are the correct number of weapons cards
-		ArrayList<Card> testRooms = testDeck.get(2);	//Makes array of just room cards
-		assertEquals(9, testRooms.size());				//Makes sure that there are the correct number of room cards
-		
-		assertEquals(board.getTestPlayer(), testDeck.get(0).get(2));
-		assertEquals(board.getTestWeapon(), testDeck.get(1).get(2));
-		assertEquals(board.getTestRoom(), testDeck.get(2).get(4));
-	}
 	
+	///*	
 	@Test
 	public void loadPeopleTest(){
 		
@@ -72,7 +56,25 @@ public class gameSetupTests {
 		//assertEquals(Color.RED, testPlayer.getPlayerColor());
 		
 	}
+	//*/
+	/*
+	@Test
+	public void loadCardTest(){
+		//Tests to assure that the deck contains the correct total number of cards
+		
+		ArrayList<ArrayList<Card>> testDeck = board.getFullDeck();
+		assertEquals(3, testDeck.size());
+		ArrayList<Card> testPeople = testDeck.get(0); //Makes array of just people cards
+		assertEquals(6, testPeople.size()); 			// Makes sure that there are the correct number of people cards
+		ArrayList<Card> testWeapons = testDeck.get(1); //Makes array of just weapon cards
+		assertEquals(6, testWeapons.size());			//Makes sure that there are the correct number of weapons cards
+		ArrayList<Card> testRooms = testDeck.get(2);	//Makes array of just room cards
+		assertEquals(9, testRooms.size());				//Makes sure that there are the correct number of room cards
+		
+		assertEquals("Marvin the Martian", testDeck.get(0).get(2).getCardName());
+		assertEquals("Laser Gun", testDeck.get(1).get(2).getCardName());
+		assertEquals("Jupiter", testDeck.get(2).get(4).getCardName());
 	
-	
-
+	}
+*/
 }

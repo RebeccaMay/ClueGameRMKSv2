@@ -6,4 +6,10 @@ public class Card {
 	public String getCardName(){
 		return cardName;
 	}
+	public void setCardName(String s){
+		cardName = s;
+	}
+	public void setCardType(CardType typeIn){
+		type = typeIn;
+	}
 }

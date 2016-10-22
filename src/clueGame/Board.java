@@ -35,9 +35,6 @@ public class Board {
 	private Player computerplayer3;
 	private Player computerplayer4;
 	private Player computerplayer5;
-	private Card testPlayer;
-	private Card testWeapon;
-	private Card testRoom;
 	private Map<Character, String> legend;
 
 	// ctor is private to ensure only one can be created
@@ -169,11 +166,36 @@ public class Board {
 		Scanner cardIn = new Scanner(cardReader);
 		
 		ArrayList<Card> people = new ArrayList<Card>();
-		fullDeck.add(people);
+		
 		ArrayList<Card> weapons = new ArrayList<Card>();
-		fullDeck.add(weapons);
+		
 		ArrayList<Card> rooms = new ArrayList<Card>();
+		
+		
+		while (cardIn.hasNextLine()){
+			String line = cardIn.nextLine();
+			String[] cardStrings = line.split(", ");
+			Card nextCard = new Card();
+			if(cardStrings[0].equals("PERSON")){
+				nextCard.setCardName(cardStrings[1]);
+				nextCard.setCardType(CardType.PERSON);
+				people.add(nextCard);
+			}
+			else if(cardStrings[0].equals("WEAPON")){
+				nextCard.setCardName(cardStrings[1]);
+				nextCard.setCardType(CardType.WEAPON);
+				weapons.add(nextCard);
+			}
+			else if(cardStrings[0].equals("ROOM")){
+				nextCard.setCardName(cardStrings[1]);
+				nextCard.setCardType(CardType.ROOM);
+				rooms.add(nextCard);
+			}
+		}
+		fullDeck.add(people);
+		fullDeck.add(weapons);
 		fullDeck.add(rooms);
+
 	}
 	
 	public void loadPlayerConfig() throws FileNotFoundException {
@@ -351,14 +373,6 @@ public class Board {
 	public Player getcomputerPlayer5(){
 		return computerplayer5;
 	}
-	public Card getTestPlayer(){
-		return testPlayer;
-	}
-	public Card getTestWeapon(){
-		return testWeapon;
-	}
-	public Card getTestRoom(){
-		return testRoom;
-	}
+
 
 }
