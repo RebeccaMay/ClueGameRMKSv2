@@ -145,6 +145,10 @@ public class Board {
 	}
 	
 	public void loadCardConfig() throws FileNotFoundException {
+		FileReader cardReader;
+		cardReader = new FileReader(cardFile);
+		Scanner cardIn = new Scanner(cardReader);
+		
 		
 	}
 

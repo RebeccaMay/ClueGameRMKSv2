@@ -27,19 +27,7 @@ public class gameSetupTests {
 	
 	@Test
 	public void loadPeopleTest(){
-		Set<Player> testPeople = board.getPeople();
-		assertEquals(6, testPeople.size());
-		Set<String> peopleNames = new HashSet<String>();
-		for(Player testPerson : testPeople){
-			peopleNames.add(testPerson.getPlayerName());
-		}
 		
-		assertTrue(peopleNames.contains("Buzz Lightyear"));
-		assertTrue(peopleNames.contains("ET"));
-		assertTrue(peopleNames.contains("Marvin the Martian"));
-		assertTrue(peopleNames.contains("Wall-E"));
-		assertTrue(peopleNames.contains("Neil Armstrong"));
-		assertTrue(peopleNames.contains("Matt Damon"));
 	}
 	
 	
