@@ -22,11 +22,14 @@ public class gameSetupTests {
 				board = Board.getInstance();
 				board.setConfigFiles("data/ClueLayout.csv", "data/ClueLegend.txt");		
 				board.setCardFile("data/cardConfigFile");
+				board.setPlayerFile("data/playerConfigFile");
 				board.initialize();
 	}
 	
 	@Test
 	public void loadPeopleTest(){
+		Player testPlayer = board.getPlayer();
+		
 		
 	}
 	

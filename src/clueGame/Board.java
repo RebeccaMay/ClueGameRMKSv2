@@ -21,9 +21,10 @@ public class Board {
 	private String layoutFile = "";
 	private String legendFile = "";
 	private String cardFile = "";
+	private String playerFile = "";
 	private int boardRows = 0;
 	private int boardCols = 0;
-
+	private Player player;
 	private Map<Character, String> legend;
 
 	// ctor is private to ensure only one can be created
@@ -47,13 +48,17 @@ public class Board {
 	public void setCardFile(String card){
 		cardFile = card;
 	}
+	
+	public void setPlayerFile(String playerFile){
+		playerFile = playerFile;
+	}
 
 	public void initialize() {
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
 			loadCardConfig();
-
+			loadPlayerConfig();
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -151,6 +156,14 @@ public class Board {
 		
 		
 	}
+	
+	public void loadPlayerConfig() throws FileNotFoundException {
+		FileReader playerReader;
+		playerReader = new FileReader(playerFile);
+		Scanner playerIn = new Scanner(playerReader);
+		
+		
+	}
 
 	public Set<BoardCell> getAdjList(int cellRow, int cellCol) {
 		return adjMtx.get(getCellAt(cellRow,cellCol));
@@ -245,5 +258,8 @@ public class Board {
 	
 	public Set<Player> getPeople(){
 		return people;
+	}
+	public Player getPlayer(){
+		return player;
 	}
 }
