@@ -1,5 +1,7 @@
 package clueGame;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -7,6 +9,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.awt.Color;
+import java.lang.reflect.Field;
 
 public class Board {
 	// variable used for singleton pattern
@@ -54,8 +58,8 @@ public class Board {
 		cardFile = card;
 	}
 	
-	public void setPlayerFile(String playerFile){
-		playerFile = playerFile;
+	public void setPlayerFile(String pf){
+		playerFile = pf;
 	}
 
 	public void initialize() {
@@ -167,7 +171,60 @@ public class Board {
 		playerReader = new FileReader(playerFile);
 		Scanner playerIn = new Scanner(playerReader);
 		
-		
+		if(playerIn.hasNextLine()){
+			String line = playerIn.nextLine();
+			String[] playerStrings = line.split(", ");
+			humanplayer = new HumanPlayer();
+			humanplayer.setPlayerName(playerStrings[1]);
+			humanplayer.setPlayerColor(playerStrings[2]);
+			humanplayer.setPlayerRow(Integer.parseInt(playerStrings[3]));
+			humanplayer.setPlayerCol(Integer.valueOf(playerStrings[4]));
+		}
+		if(playerIn.hasNextLine()){
+			String line = playerIn.nextLine();
+			String[] playerStrings = line.split(", ");
+			computerplayer1 = new ComputerPlayer();
+			computerplayer1.setPlayerName(playerStrings[1]);
+			computerplayer1.setPlayerColor(playerStrings[2]);
+			computerplayer1.setPlayerRow(Integer.parseInt(playerStrings[3]));
+			computerplayer1.setPlayerCol(Integer.valueOf(playerStrings[4]));
+		}
+		if(playerIn.hasNextLine()){
+			String line = playerIn.nextLine();
+			String[] playerStrings = line.split(", ");
+			computerplayer2 = new ComputerPlayer();
+			computerplayer2.setPlayerName(playerStrings[1]);
+			computerplayer2.setPlayerColor(playerStrings[2]);
+			computerplayer2.setPlayerRow(Integer.parseInt(playerStrings[3]));
+			computerplayer2.setPlayerCol(Integer.valueOf(playerStrings[4]));
+		}
+		if(playerIn.hasNextLine()){
+			String line = playerIn.nextLine();
+			String[] playerStrings = line.split(", ");
+			computerplayer3 = new ComputerPlayer();
+			computerplayer3.setPlayerName(playerStrings[1]);
+			computerplayer3.setPlayerColor(playerStrings[2]);
+			computerplayer3.setPlayerRow(Integer.parseInt(playerStrings[3]));
+			computerplayer3.setPlayerCol(Integer.valueOf(playerStrings[4]));
+		}
+		if(playerIn.hasNextLine()){
+			String line = playerIn.nextLine();
+			String[] playerStrings = line.split(", ");
+			computerplayer4 = new ComputerPlayer();
+			computerplayer4.setPlayerName(playerStrings[1]);
+			computerplayer4.setPlayerColor(playerStrings[2]);
+			computerplayer4.setPlayerRow(Integer.parseInt(playerStrings[3]));
+			computerplayer4.setPlayerCol(Integer.valueOf(playerStrings[4]));
+		}
+		if(playerIn.hasNextLine()){
+			String line = playerIn.nextLine();
+			String[] playerStrings = line.split(", ");
+			computerplayer5 = new ComputerPlayer();
+			computerplayer5.setPlayerName(playerStrings[1]);
+			computerplayer5.setPlayerColor(playerStrings[2]);
+			computerplayer5.setPlayerRow(Integer.valueOf(playerStrings[3]));
+			computerplayer5.setPlayerCol(Integer.valueOf(playerStrings[4]));
+		}
 	}
 
 	public Set<BoardCell> getAdjList(int cellRow, int cellCol) {
