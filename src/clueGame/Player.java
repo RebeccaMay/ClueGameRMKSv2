@@ -58,4 +58,12 @@ public class Player {
 		//co = Color.GRAY;
 		return co;
 	}
+	
+	public void addCardtoDeck(Card c){
+		deck.add(c);
+	}
+	
+	public ArrayList<Card> getDeck(){
+		return deck;
+	}
 }

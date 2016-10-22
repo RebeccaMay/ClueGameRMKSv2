@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.awt.Color;
@@ -22,7 +23,7 @@ public class Board {
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private ArrayList<ArrayList<Card>> fullDeck = new ArrayList<ArrayList<Card>>();
-	private Set<Player> people = new HashSet<Player>();
+	//private Set<Player> people = new HashSet<Player>();
 	private String layoutFile = "";
 	private String legendFile = "";
 	private String cardFile = "";
@@ -37,7 +38,9 @@ public class Board {
 	private Player computerplayer5;
 	private int numPlayers = 5; //will change depending on how many computer players the user wants to interact with
 	private Map<Character, String> legend;
-
+	ArrayList<Card> people = new ArrayList<Card>();
+	ArrayList<Card> weapons = new ArrayList<Card>();
+	ArrayList<Card> rooms = new ArrayList<Card>();
 	// ctor is private to ensure only one can be created
 	private Board() {
 		adjMtx = new HashMap<BoardCell, HashSet<BoardCell>>();
@@ -165,13 +168,6 @@ public class Board {
 		FileReader cardReader;
 		cardReader = new FileReader(cardFile);
 		Scanner cardIn = new Scanner(cardReader);
-		
-		ArrayList<Card> people = new ArrayList<Card>();
-		
-		ArrayList<Card> weapons = new ArrayList<Card>();
-		
-		ArrayList<Card> rooms = new ArrayList<Card>();
-		
 		
 		while (cardIn.hasNextLine()){
 			String line = cardIn.nextLine();
@@ -347,13 +343,32 @@ public class Board {
 		}
 	}
 	
+	public void dealDeck(){
+		//can change numPlayers here based on user input?
+		Random rand = new Random();
+		int n = rand.nextInt(5);
+		Solution sol = new Solution();
+		sol.person = people.get(n).getCardName();
+		people.remove(n);
+		
+		n = rand.nextInt(5);
+		sol.weapon = weapons.get(n).getCardName();
+		weapons.remove(n);
+		
+		n = rand.nextInt(8);
+		sol.room = rooms.get(n).getCardName();
+		rooms.remove(n);
+		
+		Set<Card> newDeck = new HashSet<Card>();
+		
+		
+	}
+	
+	
 	public ArrayList<ArrayList<Card>> getFullDeck(){
 		return fullDeck;
 	}
 	
-	public Set<Player> getPeople(){
-		return people;
-	}
 	public Player gethumanPlayer(){
 		return humanplayer;
 	}

@@ -75,5 +75,48 @@ public class gameSetupTests {
 		assertEquals("Jupiter", testDeck.get(2).get(4).getCardName());
 	
 	}
+	
+	@Test
+	public void dealingTest(){
+		//Tests to ensure that deck of cards has been distributed properly to all 6 players
+		assertEquals(0, board.getFullDeck().size()); //all cards should be dealt - have been moved from full deck into individual players arrays
+		
+		Player testPlayer = board.gethumanPlayer(); //make sure that all 6 players have 3 cards
+		assertEquals(3, testPlayer.getDeck().size()); //so all cards are distributed evenly
+		testPlayer = board.getcomputerPlayer1();
+		assertEquals(3, testPlayer.getDeck().size());
+		testPlayer = board.getcomputerPlayer2();
+		assertEquals(3, testPlayer.getDeck().size());
+		testPlayer = board.getcomputerPlayer3();
+		assertEquals(3, testPlayer.getDeck().size());
+		testPlayer = board.getcomputerPlayer4();
+		assertEquals(3, testPlayer.getDeck().size());
+		testPlayer = board.getcomputerPlayer5();
+		assertEquals(3, testPlayer.getDeck().size());
+		
+		assertFalse(board.getcomputerPlayer4().getDeck().contains(testPlayer.getDeck().get(0)));
+		assertFalse(board.getcomputerPlayer3().getDeck().contains(testPlayer.getDeck().get(1)));
+		assertFalse(board.getcomputerPlayer2().getDeck().contains(testPlayer.getDeck().get(2)));
+		
+		testPlayer = board.getcomputerPlayer4();
+		assertFalse(board.getcomputerPlayer3().getDeck().contains(testPlayer.getDeck().get(0)));
+		assertFalse(board.getcomputerPlayer2().getDeck().contains(testPlayer.getDeck().get(1)));
+		assertFalse(board.getcomputerPlayer1().getDeck().contains(testPlayer.getDeck().get(2)));
+		
+		testPlayer = board.getcomputerPlayer3();
+		assertFalse(board.getcomputerPlayer2().getDeck().contains(testPlayer.getDeck().get(0)));
+		assertFalse(board.getcomputerPlayer1().getDeck().contains(testPlayer.getDeck().get(1)));
+		assertFalse(board.getcomputerPlayer5().getDeck().contains(testPlayer.getDeck().get(2)));
+		
+		testPlayer = board.getcomputerPlayer2();
+		assertFalse(board.getcomputerPlayer1().getDeck().contains(testPlayer.getDeck().get(0)));
+		assertFalse(board.getcomputerPlayer5().getDeck().contains(testPlayer.getDeck().get(1)));
+		assertFalse(board.getcomputerPlayer4().getDeck().contains(testPlayer.getDeck().get(2)));
+		
+		testPlayer = board.getcomputerPlayer1();
+		assertFalse(board.getcomputerPlayer5().getDeck().contains(testPlayer.getDeck().get(0)));
+		assertFalse(board.getcomputerPlayer4().getDeck().contains(testPlayer.getDeck().get(1)));
+		assertFalse(board.getcomputerPlayer3().getDeck().contains(testPlayer.getDeck().get(2)));
+	}
 
 }
