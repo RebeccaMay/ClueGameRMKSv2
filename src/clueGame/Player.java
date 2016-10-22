@@ -12,4 +12,14 @@ public class Player {
 	public String getPlayerName(){
 		return name;
 	}
+	public int getPlayerRow(){
+		return playerRow;
+	}
+	public int getPlayerCol(){
+		return playerCol;
+	}
+	
+	public Color getPlayerColor(){
+		return color;
+	}
 }

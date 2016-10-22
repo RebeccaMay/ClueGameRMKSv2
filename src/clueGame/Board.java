@@ -24,7 +24,12 @@ public class Board {
 	private String playerFile = "";
 	private int boardRows = 0;
 	private int boardCols = 0;
-	private Player player;
+	private Player humanplayer;
+	private Player computerplayer1;
+	private Player computerplayer2;
+	private Player computerplayer3;
+	private Player computerplayer4;
+	private Player computerplayer5;
 	private Map<Character, String> legend;
 
 	// ctor is private to ensure only one can be created
@@ -259,7 +264,25 @@ public class Board {
 	public Set<Player> getPeople(){
 		return people;
 	}
-	public Player getPlayer(){
-		return player;
+	public Player gethumanPlayer(){
+		return humanplayer;
 	}
+	public Player getcomputerPlayer1(){
+		return computerplayer1;
+	}
+
+	public Player getcomputerPlayer2(){
+		return computerplayer2;
+	}
+
+	public Player getcomputerPlayer3(){
+		return computerplayer3;
+	}
+	public Player getcomputerPlayer4(){
+		return computerplayer4;
+	}
+	public Player getcomputerPlayer5(){
+		return computerplayer5;
+	}
+
 }
