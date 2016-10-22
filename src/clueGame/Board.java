@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class Board {
 	private BoardCell[][] grid;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
-	private Set<Card> fullDeck = new HashSet<Card>();
+	private ArrayList<ArrayList<Card>> fullDeck = new ArrayList<ArrayList<Card>>();
 	private Set<Player> people = new HashSet<Player>();
 	private String layoutFile = "";
 	private String legendFile = "";
@@ -34,6 +35,9 @@ public class Board {
 	private Player computerplayer3;
 	private Player computerplayer4;
 	private Player computerplayer5;
+	private Card testPlayer;
+	private Card testWeapon;
+	private Card testRoom;
 	private Map<Character, String> legend;
 
 	// ctor is private to ensure only one can be created
@@ -158,12 +162,18 @@ public class Board {
 
 	}
 	
+	
 	public void loadCardConfig() throws FileNotFoundException {
 		FileReader cardReader;
 		cardReader = new FileReader(cardFile);
 		Scanner cardIn = new Scanner(cardReader);
 		
-		
+		ArrayList<Card> people = new ArrayList<Card>();
+		fullDeck.add(people);
+		ArrayList<Card> weapons = new ArrayList<Card>();
+		fullDeck.add(weapons);
+		ArrayList<Card> rooms = new ArrayList<Card>();
+		fullDeck.add(rooms);
 	}
 	
 	public void loadPlayerConfig() throws FileNotFoundException {
@@ -314,7 +324,7 @@ public class Board {
 		}
 	}
 	
-	public Set<Card> getFullDeck(){
+	public ArrayList<ArrayList<Card>> getFullDeck(){
 		return fullDeck;
 	}
 	
@@ -340,6 +350,15 @@ public class Board {
 	}
 	public Player getcomputerPlayer5(){
 		return computerplayer5;
+	}
+	public Card getTestPlayer(){
+		return testPlayer;
+	}
+	public Card getTestWeapon(){
+		return testWeapon;
+	}
+	public Card getTestRoom(){
+		return testRoom;
 	}
 
 }
