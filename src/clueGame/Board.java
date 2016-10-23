@@ -1,7 +1,5 @@
 package clueGame;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -11,32 +9,21 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
-import java.awt.Color;
-import java.lang.reflect.Field;
 
 public class Board {
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
-
 	private Map<BoardCell, HashSet<BoardCell>> adjMtx;
 	private BoardCell[][] grid;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	private ArrayList<ArrayList<Card>> fullDeck = new ArrayList<ArrayList<Card>>();
-	//private Set<Player> people = new HashSet<Player>();
 	private String layoutFile = "";
 	private String legendFile = "";
 	private String cardFile = "";
 	private String playerFile = "";
 	private int boardRows = 0;
 	private int boardCols = 0;
-	private Player humanplayer;
-	private Player computerplayer1;
-	private Player computerplayer2;
-	private Player computerplayer3;
-	private Player computerplayer4;
-	private Player computerplayer5;
-	private int numPlayers = 5; //will change depending on how many computer players the user wants to interact with
 	private Map<Character, String> legend;
 	ArrayList<Card> people = new ArrayList<Card>();
 	ArrayList<Card> weapons = new ArrayList<Card>();
@@ -207,61 +194,30 @@ public class Board {
 		FileReader playerReader;
 		playerReader = new FileReader(playerFile);
 		Scanner playerIn = new Scanner(playerReader);
-		
-		if(playerIn.hasNextLine()){
+		int counter = 0;
+		while (playerIn.hasNextLine()){
 			String line = playerIn.nextLine();
+			System.out.println(line);
 			String[] playerStrings = line.split(", ");
-			humanplayer = new HumanPlayer();
-			humanplayer.setPlayerName(playerStrings[1]);
-			humanplayer.setPlayerColor(playerStrings[2]);
-			humanplayer.setPlayerRow(Integer.parseInt(playerStrings[3]));
-			humanplayer.setPlayerCol(Integer.valueOf(playerStrings[4]));
+			if (counter == 0){
+				Player newPlayer = new HumanPlayer();
+				newPlayer.setPlayerName(playerStrings[0]);
+				newPlayer.setPlayerColor(playerStrings[1]);
+				newPlayer.setPlayerRow(Integer.parseInt(playerStrings[2]));
+				newPlayer.setPlayerCol(Integer.parseInt(playerStrings[3]));
+				playersInPlay.add(newPlayer);
+			}
+			else{
+				Player newPlayer = new ComputerPlayer();
+				newPlayer.setPlayerName(playerStrings[0]);
+				newPlayer.setPlayerColor(playerStrings[1]);
+				newPlayer.setPlayerRow(Integer.parseInt(playerStrings[2]));
+				newPlayer.setPlayerCol(Integer.parseInt(playerStrings[3]));
+				playersInPlay.add(newPlayer);
+			}
+			counter++;
 		}
-		if(playerIn.hasNextLine()){
-			String line = playerIn.nextLine();
-			String[] playerStrings = line.split(", ");
-			computerplayer1 = new ComputerPlayer();
-			computerplayer1.setPlayerName(playerStrings[1]);
-			computerplayer1.setPlayerColor(playerStrings[2]);
-			computerplayer1.setPlayerRow(Integer.parseInt(playerStrings[3]));
-			computerplayer1.setPlayerCol(Integer.valueOf(playerStrings[4]));
-		}
-		if(playerIn.hasNextLine()){
-			String line = playerIn.nextLine();
-			String[] playerStrings = line.split(", ");
-			computerplayer2 = new ComputerPlayer();
-			computerplayer2.setPlayerName(playerStrings[1]);
-			computerplayer2.setPlayerColor(playerStrings[2]);
-			computerplayer2.setPlayerRow(Integer.parseInt(playerStrings[3]));
-			computerplayer2.setPlayerCol(Integer.valueOf(playerStrings[4]));
-		}
-		if(playerIn.hasNextLine()){
-			String line = playerIn.nextLine();
-			String[] playerStrings = line.split(", ");
-			computerplayer3 = new ComputerPlayer();
-			computerplayer3.setPlayerName(playerStrings[1]);
-			computerplayer3.setPlayerColor(playerStrings[2]);
-			computerplayer3.setPlayerRow(Integer.parseInt(playerStrings[3]));
-			computerplayer3.setPlayerCol(Integer.valueOf(playerStrings[4]));
-		}
-		if(playerIn.hasNextLine()){
-			String line = playerIn.nextLine();
-			String[] playerStrings = line.split(", ");
-			computerplayer4 = new ComputerPlayer();
-			computerplayer4.setPlayerName(playerStrings[1]);
-			computerplayer4.setPlayerColor(playerStrings[2]);
-			computerplayer4.setPlayerRow(Integer.parseInt(playerStrings[3]));
-			computerplayer4.setPlayerCol(Integer.valueOf(playerStrings[4]));
-		}
-		if(playerIn.hasNextLine()){
-			String line = playerIn.nextLine();
-			String[] playerStrings = line.split(", ");
-			computerplayer5 = new ComputerPlayer();
-			computerplayer5.setPlayerName(playerStrings[1]);
-			computerplayer5.setPlayerColor(playerStrings[2]);
-			computerplayer5.setPlayerRow(Integer.valueOf(playerStrings[3]));
-			computerplayer5.setPlayerCol(Integer.valueOf(playerStrings[4]));
-		}
+		playerIn.close();
 	}
 
 	public Set<BoardCell> getAdjList(int cellRow, int cellCol) {
@@ -317,12 +273,6 @@ public class Board {
 				}
 
 				adjMtx.put(grid[i][j], tempSet);
-
-				// if row = 0 and col = 0, add (0,j+1) and (i+1, and 0)
-				// if row = # rows - 1 and col = # of cols - 1, add (0, j-1) and (i+1, 0)
-				// if row = 0, but col is ok, add (0, j + 1), (0, j - 1), and (i + 1, j)
-				// if row is ok, but col = 0, add (0, j + 1), (i - 1), (j - 1)
-				// etc
 			}
 		}
 	}
@@ -384,46 +334,6 @@ public class Board {
 		weapons.add(w);
 		rooms.add(r);
 		
-		if(numPlayers == 1){ //NEED A POINT WHERE USER SETS NUMPLAYERS
-			playersInPlay = new ArrayList<Player>();
-			playersInPlay.add(humanplayer);
-			playersInPlay.add(computerplayer1);
-		}
-		if(numPlayers == 2){ //NEED A POINT WHERE USER SETS NUMPLAYERS
-			playersInPlay = new ArrayList<Player>();
-			playersInPlay.add(humanplayer);
-			playersInPlay.add(computerplayer1);
-			playersInPlay.add(computerplayer2);
-		}
-		if(numPlayers == 3){ //NEED A POINT WHERE USER SETS NUMPLAYERS
-			playersInPlay = new ArrayList<Player>();
-			playersInPlay.add(humanplayer);
-			playersInPlay.add(computerplayer1);
-			playersInPlay.add(computerplayer2);
-			playersInPlay.add(computerplayer3);
-		}
-		if(numPlayers == 4){ //NEED A POINT WHERE USER SETS NUMPLAYERS
-			playersInPlay = new ArrayList<Player>();
-			playersInPlay.add(humanplayer);
-			playersInPlay.add(computerplayer1);
-			playersInPlay.add(computerplayer2);
-			playersInPlay.add(computerplayer3);
-			playersInPlay.add(computerplayer4);
-		}
-		if(numPlayers == 5){ //NEED A POINT WHERE USER SETS NUMPLAYERS
-			playersInPlay = new ArrayList<Player>();
-			playersInPlay.add(humanplayer);
-			playersInPlay.add(computerplayer1);
-			playersInPlay.add(computerplayer2);
-			playersInPlay.add(computerplayer3);
-			playersInPlay.add(computerplayer4);
-			playersInPlay.add(computerplayer5);
-		}
-		//while there are more cards in deck
-			//iterate over all players, each player gets one card
-				//play.addCardtoDeck();
-				//newDeck.remove();
-		
 		while(newDeck.size() > 0){
 			for(Player eachPlayer : playersInPlay){
 				if(newDeck.size() == 0) break;
@@ -439,29 +349,13 @@ public class Board {
 	public ArrayList<ArrayList<Card>> getFullDeck(){
 		return fullDeck;
 	}
-	
-	public Player gethumanPlayer(){
-		return humanplayer;
-	}
-	public Player getcomputerPlayer1(){
-		return computerplayer1;
-	}
 
-	public Player getcomputerPlayer2(){
-		return computerplayer2;
-	}
-
-	public Player getcomputerPlayer3(){
-		return computerplayer3;
-	}
-	public Player getcomputerPlayer4(){
-		return computerplayer4;
-	}
-	public Player getcomputerPlayer5(){
-		return computerplayer5;
-	}
 	public ArrayList<Card> getNewDeck(){
 		return newDeck;
+	}
+	
+	public ArrayList<Player> getPlayersInPlay(){
+		return playersInPlay;
 	}
 
 }

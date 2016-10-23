@@ -1,20 +1,13 @@
 package tests;
 
 import static org.junit.Assert.*;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.Player;
-import javafx.scene.paint.Color;
+import java.awt.Color;
 
 public class gameSetupTests {
 	private static Board board;
@@ -33,27 +26,27 @@ public class gameSetupTests {
 	public void loadPeopleTest(){
 		
 		//Testing attributes for the human player
-		Player testPlayer = board.gethumanPlayer();
+		Player testPlayer = board.getPlayersInPlay().get(0);
 		assertEquals(0, testPlayer.getPlayerRow());
 		assertEquals(4, testPlayer.getPlayerCol());
 		assertEquals("Buzz Lightyear", testPlayer.getPlayerName());
-		//System.out.println(testPlayer.getPlayerColor());
-		//System.out.println(Color.MAGENTA.toString());
-		//assertEquals(Color.MAGENTA, testPlayer.getPlayerColor().toString());
+		System.out.println(testPlayer.getPlayerColor());
+		System.out.println(Color.MAGENTA.toString());
+		assertEquals(Color.MAGENTA, testPlayer.getPlayerColor());
 		
 		//Testing attributes for 3rd computer player
-		testPlayer = board.getcomputerPlayer3();
+		testPlayer = board.getPlayersInPlay().get(3);
 		assertEquals(23, testPlayer.getPlayerRow());
 		assertEquals(9, testPlayer.getPlayerCol());
 		assertEquals("Wall-E", testPlayer.getPlayerName());
-		//assertEquals(Color.GRAY, testPlayer.getPlayerColor());
+		assertEquals(Color.GRAY, testPlayer.getPlayerColor());
 		
 		//Testing attributes for last computer player
-		testPlayer = board.getcomputerPlayer5();
+		testPlayer = board.getPlayersInPlay().get(5);
 		assertEquals(9, testPlayer.getPlayerRow());
 		assertEquals(20, testPlayer.getPlayerCol());
 		assertEquals("Matt Damon", testPlayer.getPlayerName());
-		//assertEquals(Color.RED, testPlayer.getPlayerColor());
+		assertEquals(Color.RED, testPlayer.getPlayerColor());
 		
 	}
 
@@ -89,42 +82,6 @@ public class gameSetupTests {
 		//Tests to ensure that deck of cards has been distributed properly to all 6 players
 		assertEquals(0, board.getNewDeck().size()); //all cards should be dealt - have been moved from new deck into individual players arrays
 		
-		Player testPlayer = board.gethumanPlayer(); //make sure that all 6 players have 3 cards
-		assertEquals(3, testPlayer.getDeck().size()); //so all cards are distributed evenly
-		testPlayer = board.getcomputerPlayer1();
-		assertEquals(3, testPlayer.getDeck().size());
-		testPlayer = board.getcomputerPlayer2();
-		assertEquals(3, testPlayer.getDeck().size());
-		testPlayer = board.getcomputerPlayer3();
-		assertEquals(3, testPlayer.getDeck().size());
-		testPlayer = board.getcomputerPlayer4();
-		assertEquals(3, testPlayer.getDeck().size());
-		testPlayer = board.getcomputerPlayer5();
-		assertEquals(3, testPlayer.getDeck().size());
-		
-		assertFalse(board.getcomputerPlayer4().getDeck().contains(testPlayer.getDeck().get(0)));
-		assertFalse(board.getcomputerPlayer3().getDeck().contains(testPlayer.getDeck().get(1)));
-		assertFalse(board.getcomputerPlayer2().getDeck().contains(testPlayer.getDeck().get(2)));
-		
-		testPlayer = board.getcomputerPlayer4();
-		assertFalse(board.getcomputerPlayer3().getDeck().contains(testPlayer.getDeck().get(0)));
-		assertFalse(board.getcomputerPlayer2().getDeck().contains(testPlayer.getDeck().get(1)));
-		assertFalse(board.getcomputerPlayer1().getDeck().contains(testPlayer.getDeck().get(2)));
-		
-		testPlayer = board.getcomputerPlayer3();
-		assertFalse(board.getcomputerPlayer2().getDeck().contains(testPlayer.getDeck().get(0)));
-		assertFalse(board.getcomputerPlayer1().getDeck().contains(testPlayer.getDeck().get(1)));
-		assertFalse(board.getcomputerPlayer5().getDeck().contains(testPlayer.getDeck().get(2)));
-		
-		testPlayer = board.getcomputerPlayer2();
-		assertFalse(board.getcomputerPlayer1().getDeck().contains(testPlayer.getDeck().get(0)));
-		assertFalse(board.getcomputerPlayer5().getDeck().contains(testPlayer.getDeck().get(1)));
-		assertFalse(board.getcomputerPlayer4().getDeck().contains(testPlayer.getDeck().get(2)));
-		
-		testPlayer = board.getcomputerPlayer1();
-		assertFalse(board.getcomputerPlayer5().getDeck().contains(testPlayer.getDeck().get(0)));
-		assertFalse(board.getcomputerPlayer4().getDeck().contains(testPlayer.getDeck().get(1)));
-		assertFalse(board.getcomputerPlayer3().getDeck().contains(testPlayer.getDeck().get(2)));
 	}
 
 }

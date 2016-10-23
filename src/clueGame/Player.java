@@ -41,21 +41,14 @@ public class Player {
 	
 	public Color convertColor(String strColor){
 		Color co;
-		//System.out.println(strColor);
 		try{
-			//System.out.println("here 1");
-			//Field field = Class.forName("java.awt.Color").getField(strColor.trim()); //something is 
-			//System.out.println("here 2");
-			//co = (Color)field.get(null);
-			Field field = Color.class.getField(strColor.trim());
+			Field field = Class.forName("java.awt.Color").getField(strColor.trim()); //something is 
+			System.out.println("here 2");
 			co = (Color)field.get(null);
 		}catch (Exception e){
-			System.out.println(e);
+			//System.out.println(e);
 			co = null;
 		}
-		//System.out.println(co);
-		//System.out.println(Color.MAGENTA);
-		//co = Color.GRAY;
 		return co;
 	}
 	
