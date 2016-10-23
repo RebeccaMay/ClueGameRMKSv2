@@ -1,0 +1,3 @@
+Bad format: Incorrect column length in row 24
+Bad format: Incorrect column length in row 24
+Bad format: Invalid second character for cell in BoardCell [row=19, col=17]
