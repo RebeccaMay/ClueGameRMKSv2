@@ -30,8 +30,6 @@ public class gameSetupTests {
 		assertEquals(0, testPlayer.getPlayerRow());
 		assertEquals(4, testPlayer.getPlayerCol());
 		assertEquals("Buzz Lightyear", testPlayer.getPlayerName());
-		System.out.println(testPlayer.getPlayerColor());
-		System.out.println(Color.MAGENTA.toString());
 		assertEquals(Color.MAGENTA, testPlayer.getPlayerColor());
 		
 		//Testing attributes for 3rd computer player

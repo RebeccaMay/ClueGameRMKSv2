@@ -163,7 +163,6 @@ public class Board {
 		Scanner cardIn = new Scanner(cardReader);
 		while (cardIn.hasNextLine()){
 			String line = cardIn.nextLine();
-			//System.out.println(line);
 			String[] cardStrings = line.split(", ");
 			Card nextCard = new Card();
 			
@@ -199,7 +198,6 @@ public class Board {
 		int counter = 0;
 		while (playerIn.hasNextLine()){
 			String line = playerIn.nextLine();
-			System.out.println(line);
 			String[] playerStrings = line.split(", ");
 			if (counter == 0){
 				Player newPlayer = new HumanPlayer();
@@ -234,42 +232,32 @@ public class Board {
 	{
 		for (int i = 0; i < grid.length; i++) // i iterates over columns
 		{
-			for (int j = 0; j < grid[i].length; j++) // j iterates over each row in a column
-			{
+			for (int j = 0; j < grid[i].length; j++){ // j iterates over each row in a column
+				
 				HashSet<BoardCell> tempSet = new HashSet<BoardCell>();
 				
-				if ((grid[i][j].getInitial() != 'W') && (!grid[i][j].isDoorway()))
-				{
-					
+				if ((grid[i][j].getInitial() != 'W') && (!grid[i][j].isDoorway())){
 					adjMtx.put(grid[i][j], tempSet);
 					continue;
 				}
-				if (i != 0) 
-				{
-					if ((grid[i-1][j].getInitial() == 'W') || (grid[i-1][j].isDoorway() && (grid[i-1][j].getDoorDirection() == DoorDirection.DOWN)))
-					{
+				if (i != 0) {
+					if ((grid[i-1][j].getInitial() == 'W') || (grid[i-1][j].isDoorway() && (grid[i-1][j].getDoorDirection() == DoorDirection.DOWN))){
 						tempSet.add(grid[i-1][j]);
 					}
 				}
-				if (i != grid.length - 1) 
-				{
-					if ((grid[i+1][j].getInitial() == 'W') || (grid[i+1][j].isDoorway() && (grid[i+1][j].getDoorDirection() == DoorDirection.UP)))
-					{
+				if (i != grid.length - 1) {
+					if ((grid[i+1][j].getInitial() == 'W') || (grid[i+1][j].isDoorway() && (grid[i+1][j].getDoorDirection() == DoorDirection.UP))){
 						tempSet.add(grid[i+1][j]);
 					}
 				}
-				if (j != 0) 
-				{
-					if ((grid[i][j-1].getInitial() == 'W') || (grid[i][j-1].isDoorway() && (grid[i][j-1].getDoorDirection() == DoorDirection.RIGHT)))
-					{
+				if (j != 0) {
+					if ((grid[i][j-1].getInitial() == 'W') || (grid[i][j-1].isDoorway() && (grid[i][j-1].getDoorDirection() == DoorDirection.RIGHT))){
 						tempSet.add(grid[i][j-1]);
 					}
 
 				}
-				if (j != grid[i].length - 1) 
-				{
-					if ((grid[i][j+1].getInitial() == 'W') || (grid[i][j+1].isDoorway() && (grid[i][j+1].getDoorDirection() == DoorDirection.LEFT)))
-					{
+				if (j != grid[i].length - 1) {
+					if ((grid[i][j+1].getInitial() == 'W') || (grid[i][j+1].isDoorway() && (grid[i][j+1].getDoorDirection() == DoorDirection.LEFT))){
 						tempSet.add(grid[i][j+1]);
 					}
 				}

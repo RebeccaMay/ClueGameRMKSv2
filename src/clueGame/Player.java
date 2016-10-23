@@ -42,11 +42,9 @@ public class Player {
 	public Color convertColor(String strColor){
 		Color co;
 		try{
-			Field field = Class.forName("java.awt.Color").getField(strColor.trim()); //something is 
-			System.out.println("here 2");
+			Field field = Class.forName("java.awt.Color").getField(strColor.trim()); 
 			co = (Color)field.get(null);
 		}catch (Exception e){
-			//System.out.println(e);
 			co = null;
 		}
 		return co;
