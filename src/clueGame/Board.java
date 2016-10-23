@@ -183,12 +183,6 @@ public class Board {
 			}
 			fullDeck.add(nextCard);
 		}
-	
-		//for(int i = 0; i < fullDeck.size(); i++){
-			//for(int j = 0; j < fullDeck.get(i).size(); j++){
-		//		System.out.println(fullDeck.get(i).get(j).getCardName());
-		//	}
-		//}
 	}
 	
 	public void loadPlayerConfig() throws FileNotFoundException {
