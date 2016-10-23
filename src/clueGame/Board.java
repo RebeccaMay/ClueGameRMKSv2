@@ -41,6 +41,8 @@ public class Board {
 	ArrayList<Card> people = new ArrayList<Card>();
 	ArrayList<Card> weapons = new ArrayList<Card>();
 	ArrayList<Card> rooms = new ArrayList<Card>();
+	private ArrayList<Card> newDeck = new ArrayList<Card>();
+	ArrayList<Player> playersInPlay = new ArrayList<Player>();
 	// ctor is private to ensure only one can be created
 	private Board() {
 		adjMtx = new HashMap<BoardCell, HashSet<BoardCell>>();
@@ -73,6 +75,7 @@ public class Board {
 			loadBoardConfig();
 			loadCardConfig();
 			loadPlayerConfig();
+			dealDeck();
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -171,6 +174,7 @@ public class Board {
 		
 		while (cardIn.hasNextLine()){
 			String line = cardIn.nextLine();
+			//System.out.println(line);
 			String[] cardStrings = line.split(", ");
 			Card nextCard = new Card();
 			if(cardStrings[0].equals("PERSON")){
@@ -192,7 +196,11 @@ public class Board {
 		fullDeck.add(people);
 		fullDeck.add(weapons);
 		fullDeck.add(rooms);
-
+		//for(int i = 0; i < fullDeck.size(); i++){
+			//for(int j = 0; j < fullDeck.get(i).size(); j++){
+		//		System.out.println(fullDeck.get(i).get(j).getCardName());
+		//	}
+		//}
 	}
 	
 	public void loadPlayerConfig() throws FileNotFoundException {
@@ -348,20 +356,83 @@ public class Board {
 		Random rand = new Random();
 		int n = rand.nextInt(5);
 		Solution sol = new Solution();
+		Card p = people.get(n);
 		sol.person = people.get(n).getCardName();
 		people.remove(n);
 		
 		n = rand.nextInt(5);
-		sol.weapon = weapons.get(n).getCardName();
+		Card w = weapons.get(n);
+		sol.weapon = weapons.get(n).getCardName(); 
 		weapons.remove(n);
 		
 		n = rand.nextInt(8);
+		Card r = rooms.get(n);
 		sol.room = rooms.get(n).getCardName();
 		rooms.remove(n);
 		
-		Set<Card> newDeck = new HashSet<Card>();
+		for(Card weapon : weapons){
+			newDeck.add(weapon);
+		}
+		for(Card person : people){
+			newDeck.add(person);
+		}
+		for(Card room : rooms){
+			newDeck.add(room);
+		}
 		
+		people.add(p);
+		weapons.add(w);
+		rooms.add(r);
 		
+		if(numPlayers == 1){ //NEED A POINT WHERE USER SETS NUMPLAYERS
+			playersInPlay = new ArrayList<Player>();
+			playersInPlay.add(humanplayer);
+			playersInPlay.add(computerplayer1);
+		}
+		if(numPlayers == 2){ //NEED A POINT WHERE USER SETS NUMPLAYERS
+			playersInPlay = new ArrayList<Player>();
+			playersInPlay.add(humanplayer);
+			playersInPlay.add(computerplayer1);
+			playersInPlay.add(computerplayer2);
+		}
+		if(numPlayers == 3){ //NEED A POINT WHERE USER SETS NUMPLAYERS
+			playersInPlay = new ArrayList<Player>();
+			playersInPlay.add(humanplayer);
+			playersInPlay.add(computerplayer1);
+			playersInPlay.add(computerplayer2);
+			playersInPlay.add(computerplayer3);
+		}
+		if(numPlayers == 4){ //NEED A POINT WHERE USER SETS NUMPLAYERS
+			playersInPlay = new ArrayList<Player>();
+			playersInPlay.add(humanplayer);
+			playersInPlay.add(computerplayer1);
+			playersInPlay.add(computerplayer2);
+			playersInPlay.add(computerplayer3);
+			playersInPlay.add(computerplayer4);
+		}
+		if(numPlayers == 5){ //NEED A POINT WHERE USER SETS NUMPLAYERS
+			playersInPlay = new ArrayList<Player>();
+			playersInPlay.add(humanplayer);
+			playersInPlay.add(computerplayer1);
+			playersInPlay.add(computerplayer2);
+			playersInPlay.add(computerplayer3);
+			playersInPlay.add(computerplayer4);
+			playersInPlay.add(computerplayer5);
+		}
+		//while there are more cards in deck
+			//iterate over all players, each player gets one card
+				//play.addCardtoDeck();
+				//newDeck.remove();
+		
+		while(newDeck.size() > 0){
+			for(Player eachPlayer : playersInPlay){
+				if(newDeck.size() == 0) break;
+				
+				n = rand.nextInt(newDeck.size());
+				eachPlayer.addCardtoDeck(newDeck.get(n));
+				newDeck.remove(n);
+			}
+		}
 	}
 	
 	
@@ -389,6 +460,8 @@ public class Board {
 	public Player getcomputerPlayer5(){
 		return computerplayer5;
 	}
-
+	public ArrayList<Card> getNewDeck(){
+		return newDeck;
+	}
 
 }

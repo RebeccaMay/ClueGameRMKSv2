@@ -62,6 +62,11 @@ public class gameSetupTests {
 		//Tests to assure that the deck contains the correct total number of cards
 		
 		ArrayList<ArrayList<Card>> testDeck = board.getFullDeck();
+		for(int i = 0; i < testDeck.size(); i++){
+			for(int j = 0; j < testDeck.get(i).size(); j++){
+				System.out.println(testDeck.get(i).get(j).getCardName());
+			}
+		}
 		assertEquals(3, testDeck.size());
 		ArrayList<Card> testPeople = testDeck.get(0); //Makes array of just people cards
 		assertEquals(6, testPeople.size()); 			// Makes sure that there are the correct number of people cards
@@ -69,17 +74,20 @@ public class gameSetupTests {
 		assertEquals(6, testWeapons.size());			//Makes sure that there are the correct number of weapons cards
 		ArrayList<Card> testRooms = testDeck.get(2);	//Makes array of just room cards
 		assertEquals(9, testRooms.size());				//Makes sure that there are the correct number of room cards
-		
-		assertEquals("Marvin the Martian", testDeck.get(0).get(2).getCardName());
-		assertEquals("Laser Gun", testDeck.get(1).get(2).getCardName());
-		assertEquals("Jupiter", testDeck.get(2).get(4).getCardName());
+		//System.out.println(testWeapons.get(4).getCardName());
+		//for(Card person : testPeople){
+		//	System.out.println(person.getCardName());
+		//}//
+		assertEquals("Marvin the Martian", testPeople.get(2).getCardName());
+		assertEquals("Laser Gun", testWeapons.get(2).getCardName());
+		assertEquals("Jupiter", testRooms.get(4).getCardName());
 	
 	}
 	
 	@Test
 	public void dealingTest(){
 		//Tests to ensure that deck of cards has been distributed properly to all 6 players
-		assertEquals(0, board.getFullDeck().size()); //all cards should be dealt - have been moved from full deck into individual players arrays
+		assertEquals(0, board.getNewDeck().size()); //all cards should be dealt - have been moved from new deck into individual players arrays
 		
 		Player testPlayer = board.gethumanPlayer(); //make sure that all 6 players have 3 cards
 		assertEquals(3, testPlayer.getDeck().size()); //so all cards are distributed evenly
