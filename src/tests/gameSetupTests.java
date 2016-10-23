@@ -54,26 +54,16 @@ public class gameSetupTests {
 	public void loadCardTest(){
 		//Tests to assure that the deck contains the correct total number of cards
 		
-		ArrayList<ArrayList<Card>> testDeck = board.getFullDeck();
-		for(int i = 0; i < testDeck.size(); i++){
-			for(int j = 0; j < testDeck.get(i).size(); j++){
-				System.out.println(testDeck.get(i).get(j).getCardName());
-			}
-		}
-		assertEquals(3, testDeck.size());
-		ArrayList<Card> testPeople = testDeck.get(0); //Makes array of just people cards
-		assertEquals(6, testPeople.size()); 			// Makes sure that there are the correct number of people cards
-		ArrayList<Card> testWeapons = testDeck.get(1); //Makes array of just weapon cards
-		assertEquals(6, testWeapons.size());			//Makes sure that there are the correct number of weapons cards
-		ArrayList<Card> testRooms = testDeck.get(2);	//Makes array of just room cards
-		assertEquals(9, testRooms.size());				//Makes sure that there are the correct number of room cards
-		//System.out.println(testWeapons.get(4).getCardName());
-		//for(Card person : testPeople){
-		//	System.out.println(person.getCardName());
-		//}//
-		assertEquals("Marvin the Martian", testPeople.get(2).getCardName());
-		assertEquals("Laser Gun", testWeapons.get(2).getCardName());
-		assertEquals("Jupiter", testRooms.get(4).getCardName());
+		ArrayList<Card> testDeck = board.getFullDeck();
+		
+		assertEquals(21, testDeck.size());
+		assertEquals(6, board.getPeopleCounter()); 			// Makes sure that there are the correct number of people cards
+		assertEquals(6, board.getWeaponCounter());			//Makes sure that there are the correct number of weapons cards
+		assertEquals(9, board.getRoomCounter());				//Makes sure that there are the correct number of room cards
+
+		assertEquals("Marvin the Martian", testDeck.get(2).getCardName());
+		assertEquals("Laser Gun", testDeck.get(8).getCardName());
+		assertEquals("Jupiter", testDeck.get(16).getCardName());
 	
 	}
 	
@@ -82,6 +72,21 @@ public class gameSetupTests {
 		//Tests to ensure that deck of cards has been distributed properly to all 6 players
 		assertEquals(0, board.getNewDeck().size()); //all cards should be dealt - have been moved from new deck into individual players arrays
 		
+		assertEquals(3, board.getPlayersInPlay().get(0).getDeck().size());	//Because there are 6 players, all players should have 3 cards
+		assertEquals(3, board.getPlayersInPlay().get(1).getDeck().size());
+		assertEquals(3, board.getPlayersInPlay().get(2).getDeck().size());
+		assertEquals(3, board.getPlayersInPlay().get(3).getDeck().size());
+		assertEquals(3, board.getPlayersInPlay().get(4).getDeck().size());
+		assertEquals(3, board.getPlayersInPlay().get(5).getDeck().size());
+		
+		assertFalse(board.getPlayersInPlay().get(0).getDeck().contains(board.getPlayersInPlay().get(1).getDeck().get(0)));
+		assertFalse(board.getPlayersInPlay().get(1).getDeck().contains(board.getPlayersInPlay().get(2).getDeck().get(1)));
+		assertFalse(board.getPlayersInPlay().get(2).getDeck().contains(board.getPlayersInPlay().get(3).getDeck().get(2)));
+		assertFalse(board.getPlayersInPlay().get(3).getDeck().contains(board.getPlayersInPlay().get(4).getDeck().get(0)));
+		assertFalse(board.getPlayersInPlay().get(4).getDeck().contains(board.getPlayersInPlay().get(5).getDeck().get(1)));
+		assertFalse(board.getPlayersInPlay().get(5).getDeck().contains(board.getPlayersInPlay().get(0).getDeck().get(2)));
+		assertFalse(board.getPlayersInPlay().get(0).getDeck().contains(board.getPlayersInPlay().get(1).getDeck().get(2)));
+		assertFalse(board.getPlayersInPlay().get(1).getDeck().contains(board.getPlayersInPlay().get(2).getDeck().get(0)));
 	}
 
 }

@@ -17,7 +17,7 @@ public class Board {
 	private BoardCell[][] grid;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
-	private ArrayList<ArrayList<Card>> fullDeck = new ArrayList<ArrayList<Card>>();
+	private ArrayList<Card> fullDeck = new ArrayList<Card>();
 	private String layoutFile = "";
 	private String legendFile = "";
 	private String cardFile = "";
@@ -30,6 +30,9 @@ public class Board {
 	ArrayList<Card> rooms = new ArrayList<Card>();
 	private ArrayList<Card> newDeck = new ArrayList<Card>();
 	ArrayList<Player> playersInPlay = new ArrayList<Player>();
+	private int peopleCounter = 0;
+	private int weaponCounter = 0;
+	private int roomCounter = 0;
 	// ctor is private to ensure only one can be created
 	private Board() {
 		adjMtx = new HashMap<BoardCell, HashSet<BoardCell>>();
@@ -158,31 +161,30 @@ public class Board {
 		FileReader cardReader;
 		cardReader = new FileReader(cardFile);
 		Scanner cardIn = new Scanner(cardReader);
-		
 		while (cardIn.hasNextLine()){
 			String line = cardIn.nextLine();
 			//System.out.println(line);
 			String[] cardStrings = line.split(", ");
 			Card nextCard = new Card();
+			
 			if(cardStrings[0].equals("PERSON")){
 				nextCard.setCardName(cardStrings[1]);
 				nextCard.setCardType(CardType.PERSON);
-				people.add(nextCard);
+				peopleCounter++;
 			}
 			else if(cardStrings[0].equals("WEAPON")){
 				nextCard.setCardName(cardStrings[1]);
 				nextCard.setCardType(CardType.WEAPON);
-				weapons.add(nextCard);
+				weaponCounter++;
 			}
 			else if(cardStrings[0].equals("ROOM")){
 				nextCard.setCardName(cardStrings[1]);
 				nextCard.setCardType(CardType.ROOM);
-				rooms.add(nextCard);
+				roomCounter++;
 			}
+			fullDeck.add(nextCard);
 		}
-		fullDeck.add(people);
-		fullDeck.add(weapons);
-		fullDeck.add(rooms);
+	
 		//for(int i = 0; i < fullDeck.size(); i++){
 			//for(int j = 0; j < fullDeck.get(i).size(); j++){
 		//		System.out.println(fullDeck.get(i).get(j).getCardName());
@@ -301,52 +303,61 @@ public class Board {
 		}
 	}
 	
+
 	public void dealDeck(){
-		//can change numPlayers here based on user input?
+		for(int i = 0; i < fullDeck.size(); i++){
+			newDeck.add(fullDeck.get(i));
+		}
+		
 		Random rand = new Random();
-		int n = rand.nextInt(5);
+		int n = rand.nextInt(newDeck.size());
+
 		Solution sol = new Solution();
-		Card p = people.get(n);
-		sol.person = people.get(n).getCardName();
-		people.remove(n);
+		boolean personSelected = false;
+		boolean weaponSelected = false;
+		boolean roomSelected = false;
 		
-		n = rand.nextInt(5);
-		Card w = weapons.get(n);
-		sol.weapon = weapons.get(n).getCardName(); 
-		weapons.remove(n);
-		
-		n = rand.nextInt(8);
-		Card r = rooms.get(n);
-		sol.room = rooms.get(n).getCardName();
-		rooms.remove(n);
-		
-		for(Card weapon : weapons){
-			newDeck.add(weapon);
+		while (personSelected == false){
+			if (newDeck.get(n).getCardType() == CardType.PERSON){
+				sol.person = newDeck.get(n).getCardName();
+				newDeck.remove(n);
+				personSelected = true;
+			}
+			n = rand.nextInt(newDeck.size()-1);
 		}
-		for(Card person : people){
-			newDeck.add(person);
+		while (weaponSelected == false){
+			if (newDeck.get(n).getCardType() == CardType.WEAPON){
+				sol.weapon = newDeck.get(n).getCardName();
+				newDeck.remove(n);
+				weaponSelected = true;
+			}
+			n = rand.nextInt(newDeck.size()-1);
 		}
-		for(Card room : rooms){
-			newDeck.add(room);
+		while (roomSelected == false){
+			if (newDeck.get(n).getCardType() == CardType.ROOM){
+				sol.room = newDeck.get(n).getCardName();
+				newDeck.remove(n);
+				roomSelected = true;
+			}
+			n = rand.nextInt(newDeck.size() -1);
 		}
-		
-		people.add(p);
-		weapons.add(w);
-		rooms.add(r);
 		
 		while(newDeck.size() > 0){
-			for(Player eachPlayer : playersInPlay){
-				if(newDeck.size() == 0) break;
-				
-				n = rand.nextInt(newDeck.size());
-				eachPlayer.addCardtoDeck(newDeck.get(n));
-				newDeck.remove(n);
+			for (Player players : playersInPlay){
+				if (newDeck.size() > 0){
+					if (newDeck.size() > 1){
+						n = rand.nextInt(newDeck.size() -1);
+					}
+					players.addCardtoDeck(newDeck.get(n));
+					newDeck.remove(n);
+				}
 			}
 		}
+		
 	}
+
 	
-	
-	public ArrayList<ArrayList<Card>> getFullDeck(){
+	public ArrayList<Card> getFullDeck(){
 		return fullDeck;
 	}
 
@@ -356,6 +367,15 @@ public class Board {
 	
 	public ArrayList<Player> getPlayersInPlay(){
 		return playersInPlay;
+	}
+	public int getPeopleCounter(){
+		return peopleCounter;
+	}
+	public int getWeaponCounter(){
+		return weaponCounter;
+	}
+	public int getRoomCounter(){
+		return roomCounter;
 	}
 
 }

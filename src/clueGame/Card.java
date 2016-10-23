@@ -12,4 +12,7 @@ public class Card {
 	public void setCardType(CardType typeIn){
 		type = typeIn;
 	}
+	public CardType getCardType(){
+		return type;
+	}
 }
