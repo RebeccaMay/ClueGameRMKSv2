@@ -25,11 +25,8 @@ public class Board {
 	private int boardRows = 0;
 	private int boardCols = 0;
 	private Map<Character, String> legend;
-	ArrayList<Card> people = new ArrayList<Card>();
-	ArrayList<Card> weapons = new ArrayList<Card>();
-	ArrayList<Card> rooms = new ArrayList<Card>();
 	private ArrayList<Card> newDeck = new ArrayList<Card>();
-	ArrayList<Player> playersInPlay = new ArrayList<Player>();
+	private ArrayList<Player> playersInPlay = new ArrayList<Player>();
 	private int peopleCounter = 0;
 	private int weaponCounter = 0;
 	private int roomCounter = 0;
@@ -338,6 +335,19 @@ public class Board {
 		
 	}
 
+	//functions for game actions ------------------------------------------------------
+	public void selectAnswer(){}
+	
+	//public Card handleSuggestion(){}
+	
+	public boolean checkAccusation(Solution accusation){
+		return false; //-------------------------------------------RETURNING TEMP
+	}
+	
+	
+	
+	
+	//functions for game actions ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	
 	public ArrayList<Card> getFullDeck(){
 		return fullDeck;

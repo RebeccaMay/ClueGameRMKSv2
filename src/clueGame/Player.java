@@ -3,6 +3,7 @@ package clueGame;
 import java.awt.Color;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Player {
 	ArrayList<Card> deck = new ArrayList<Card>();
@@ -57,4 +58,10 @@ public class Player {
 	public ArrayList<Card> getDeck(){
 		return deck;
 	}
+	
+	public Card disproveSuggestion(Solution suggestion){ //-------------------------------------------RETURNING TEMP
+		Card temp = new Card();
+		return temp;
+	}
+	
 }

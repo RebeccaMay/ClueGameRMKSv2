@@ -15,4 +15,7 @@ public class Card {
 	public CardType getCardType(){
 		return type;
 	}
+	public boolean equals(){
+		return false; //returning temp ------------------------------------------------------
+	}
 }
