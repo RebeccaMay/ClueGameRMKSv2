@@ -7,6 +7,7 @@ import java.util.Set;
 public class ComputerPlayer extends Player {
 	private BoardCell lastRoomVisited = new BoardCell();
 	private ArrayList<BoardCell> roomsVisited = new ArrayList<BoardCell>();
+	private Solution accusation = new Solution();
 	public BoardCell pickLocation(Set<BoardCell> targets){ 
 		ArrayList<BoardCell> targetArray = new ArrayList<BoardCell>();
 		for(BoardCell target : targets){
@@ -39,13 +40,21 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public void makeAccusation(){
+		//get name of room for board cell at current location
 		
 	}
 	
-	//public Solution createSuggestion(){}
+	public Solution createSuggestion(){
+		Solution s = new Solution(); //------------------------------------------------------------------------------------
+		return s;
+	}
 	
 	//getter and setter
 	public void addRoomToRoomsVisited(BoardCell room){
 		roomsVisited.add(room);
+	}
+	
+	public Solution getAccusation(){
+		return accusation;
 	}
 }
