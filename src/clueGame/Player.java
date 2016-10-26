@@ -3,6 +3,7 @@ package clueGame;
 import java.awt.Color;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Set;
 
 public class Player {
@@ -59,9 +60,31 @@ public class Player {
 		return deck;
 	}
 	
-	public Card disproveSuggestion(Solution suggestion){ //-------------------------------------------RETURNING TEMP
-		Card temp = new Card();
-		return temp;
+	public Card disproveSuggestion(Solution suggestion){ 
+		ArrayList<Card> matchingCards = new ArrayList<Card>();
+		Random r = new Random();
+		for (Card c : deck){
+			if(c.getCardName().equals(suggestion.person)){
+				matchingCards.add(c);
+			}
+			else if(c.getCardName().equals(suggestion.weapon)){
+				matchingCards.add(c);
+			}
+			else if (c.getCardName().equals(suggestion.room)){
+				matchingCards.add(c);
+			}
+		}
+		
+		if(matchingCards.size() == 0){
+			return null;
+		}
+		else if(matchingCards.size() == 1){
+			return matchingCards.get(0);
+		}
+		else{
+			int n = r.nextInt(matchingCards.size());
+			return matchingCards.get(n);
+		}
 	}
 	
 }
