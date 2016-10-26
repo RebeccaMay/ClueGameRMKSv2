@@ -176,6 +176,7 @@ public class Board {
 			else if(cardStrings[0].equals("ROOM")){
 				nextCard.setCardName(cardStrings[1]);
 				nextCard.setCardType(CardType.ROOM);
+				nextCard.setRoomInitial(cardStrings[2]);
 				roomCounter++;
 			}
 			fullDeck.add(nextCard);

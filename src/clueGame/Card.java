@@ -1,8 +1,9 @@
 package clueGame;
 
 public class Card {
-	String cardName;
-	CardType type;
+	private String cardName;
+	private CardType type;
+	private String roomInitial = ""; 	//used only for cards that are rooms
 	public String getCardName(){
 		return cardName;
 	}
@@ -17,5 +18,11 @@ public class Card {
 	}
 	public boolean equals(){
 		return false; //returning temp ------------------------------------------------------
+	}
+	public void setRoomInitial(String s){
+		roomInitial = s;
+	}
+	public String getRoomInitial(){
+		return roomInitial;
 	}
 }

@@ -10,12 +10,12 @@ WEAPON, Laser Gun
 WEAPON, Meteor Strike
 WEAPON, The Void
 WEAPON, Candlestick
-ROOM, Mercury
-ROOM, Venus
-ROOM, Earth
-ROOM, Mars
-ROOM, Jupiter
-ROOM, Saturn
-ROOM, Pluto
-ROOM, Uranus
-ROOM, Neptune
+ROOM, Mercury, M
+ROOM, Venus, V
+ROOM, Earth, E
+ROOM, Mars, A
+ROOM, Jupiter, J
+ROOM, Saturn, S
+ROOM, Pluto, P
+ROOM, Uranus, U
+ROOM, Neptune, N
