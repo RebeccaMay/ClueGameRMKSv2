@@ -80,8 +80,6 @@ public class ComputerPlayer extends Player {
 				}
 			}			
 		}
-		//System.out.println(peopleNotSeen.toString());
-		//System.out.println(weaponNotSeen.toString());
 		//if only one weapon unseen, must choose the unseen weapon
 		if(weaponNotSeen.size() == 1){
 			s.weapon = weaponNotSeen.get(0).getCardName();
@@ -121,7 +119,6 @@ public class ComputerPlayer extends Player {
 		return currentRoom;
 	}
 	public void addToCardsSeen(Card c){
-		//System.out.println(c.getCardName());
 		cardsSeen.add(c);
 	}
 	public void removeFromCardsSeen(Card c){	//Function purely for use in testing

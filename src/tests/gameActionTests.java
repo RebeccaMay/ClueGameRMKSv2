@@ -120,7 +120,7 @@ public class gameActionTests {
 		assert(count3 > 1);
 	}
 	//checking an accusation
-	/*@Test
+	@Test
 	public void checkAccusationTest(){
 		ComputerPlayer testPlayer = new ComputerPlayer();
 		//set solution
@@ -177,7 +177,7 @@ public class gameActionTests {
 		assertTrue(acc.weapon.equals(sol.weapon));
 		
 	}
-	*/
+	
 	//disprove a suggestion
 	@Test
 	public void disproveSuggestionTest(){
@@ -232,7 +232,7 @@ public class gameActionTests {
 		testPlayer.addToCardsSeen(board.getFullDeck().get(2));
 		testPlayer.addToCardsSeen(board.getFullDeck().get(3));
 		testPlayer.addToCardsSeen(board.getFullDeck().get(4)); //the 6th card, Matt Damon, has not been seen
-		//System.out.println(testPlayer.getCardsSeen());
+		
 		testSuggestion = testPlayer.createSuggestion();
 		assertEquals("Matt Damon", testSuggestion.person);
 		
@@ -263,7 +263,6 @@ public class gameActionTests {
 
 		for(int i = 0; i < 300; i++){
 			testSuggestion = testPlayer.createSuggestion();
-			//System.out.println(testSuggestion.person);
 			if(testSuggestion.person.equals("Wall-E")) count3++;
 			if(testSuggestion.person.equals("Neil Armstrong")) count4++;
 			if(testSuggestion.person.equals("Matt Damon")) count5++;
