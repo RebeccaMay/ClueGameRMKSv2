@@ -169,7 +169,7 @@ public class gameActionTests {
 		assertTrue(acc.room.equals(sol.room));
 		assertFalse(acc.weapon.equals(sol.weapon));
 		
-		sol.weapon = "CandleStick";
+		sol.weapon = "Candlestick";
 		sol.room = "Jupiter";
 		acc = testPlayer.getAccusation();
 		assertTrue(acc.person.equals(sol.person));

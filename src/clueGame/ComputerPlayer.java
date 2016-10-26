@@ -45,10 +45,56 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public void makeAccusation(){//-------------------------------------------------------------------------------------
-		//create solution object in make accusation function
-				//if everything is good, returns true
-				//otherwise returns false
+		board = Board.getInstance();
+		ArrayList<Card> peopleNotSeen = new ArrayList<Card>();
+		ArrayList<Card> weaponNotSeen = new ArrayList<Card>();
+		ArrayList<Card> roomNotSeen = new ArrayList<Card>(); 
+		Random r = new Random();
 		
+		//find which people, rooms, and weapons have not been seen
+		for (int i = 0; i < board.getFullDeck().size(); i++){
+			if (!cardsSeen.contains(board.getFullDeck().get(i))){
+				//System.out.println(i);
+				if(board.getFullDeck().get(i).getCardType() == CardType.PERSON){
+					peopleNotSeen.add(board.getFullDeck().get(i));
+				}
+				if(board.getFullDeck().get(i).getCardType() == CardType.WEAPON){
+					weaponNotSeen.add(board.getFullDeck().get(i));
+				}
+				if(board.getFullDeck().get(i).getCardType() == CardType.ROOM){
+					roomNotSeen.add(board.getFullDeck().get(i));
+				}
+			}			
+		}
+		//if only one weapon unseen, must choose the unseen weapon
+		if(weaponNotSeen.size() == 1){
+			accusation.weapon = weaponNotSeen.get(0).getCardName();
+		}
+		//otherwise, choose weapon randomly
+		else{
+			int n = r.nextInt(weaponNotSeen.size());
+			accusation.weapon = weaponNotSeen.get(n).getCardName();
+		}
+		
+		//if only one person unseen, must choose the unseen person
+		if(peopleNotSeen.size() == 1){
+			accusation.person = peopleNotSeen.get(0).getCardName();
+		}
+		//otherwise, choose person randomly
+		else{
+			int n = r.nextInt(peopleNotSeen.size());
+			accusation.person = peopleNotSeen.get(n).getCardName();
+		}
+		
+		//if only one person unseen, must choose the unseen person
+		if(roomNotSeen.size() == 1){
+			accusation.room = roomNotSeen.get(0).getCardName();
+		}
+		//otherwise, choose person randomly
+		else{
+			int n = r.nextInt(roomNotSeen.size());
+			accusation.room = roomNotSeen.get(n).getCardName();
+		}
 	}
 	
 	public Solution createSuggestion(){
