@@ -215,7 +215,7 @@ public class gameActionTests {
 	//handling a suggestion
 	@Test
 	public void handleSuggestionTest(){
-		Solution testSuggestion = new Solution();
+		Solution testSuggestion = new Solution(); //add id to solution
 		
 		//generate players and their decks
 		HumanPlayer testHuman = new HumanPlayer();
@@ -231,21 +231,41 @@ public class gameActionTests {
 		testC2.addCardtoDeck(board.getFullDeck().get(9));
 		
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(testHuman);
-		players.add(testC2);
-		players.add(testC2);
+		players.add(testHuman);		//id to make accuser: 0
+		players.add(testC1);		//id to make accuser: 1
+		players.add(testC2);		//id to make accuser: 2
 		
 		//Create solution that no one can disprove, no players have the following cards
 		testSuggestion.person = "ET";
 		testSuggestion.weapon = "Black Hole";
 		testSuggestion.room = "Mercury";
+		testSuggestion.id = 1;	//this id will match the index of the accuser. As of now, the accuser is C1
 		
 		assertEquals(null, board.handleSuggestion(testSuggestion));
 		
 		//Suggestion only accusing player can disprove, returns null (C1 will be accusing player)
-		testSuggestion.person = "Wall-E";		//How do we figure out who the accuser is???
+		testSuggestion.person = "Wall-E";
+		assertEquals(null, board.handleSuggestion(testSuggestion));
 		
+		//Suggestion only human player can disprove returns answer, C1 is still accuser
+		testSuggestion.person = "Buzz Lightyear";	//now matches the testHuman deck
+		assertEquals(board.getFullDeck().get(0), board.handleSuggestion(testSuggestion));
 		
+		//Suggestion only human can disprove, but human is accuser, returns null
+		testSuggestion.id = 0;	//human is now accuser
+		assertEquals(null, board.handleSuggestion(testSuggestion));
+		
+		//Suggestion that two players can disprove, correct player (based on starting with nest player in list) returns answer
+		//human is accuser, C1 should answer
+		testSuggestion.person = "Wall-E";		//C1 has wall-E
+		testSuggestion.weapon = "Meteor Strike";	//C2 has Meteor Strike
+		assertEquals(board.getFullDeck().get(3), board.handleSuggestion(testSuggestion));
+		
+		//Suggestion that human and another player can disprove, other player is next in list, ensure other player returns answer
+		//C1 is accuser, C2 is next to answer
+		testSuggestion.id = 1;	//C1 is now accuser
+		testSuggestion.person = "Buzz Lightyear";		//human has buzz, can disprove but won't
+		assertEquals(board.getFullDeck().get(9), board.handleSuggestion(testSuggestion));	//C2 has meteor strike which should be returned
 	}
 	
 	//creating a suggestion
