@@ -17,7 +17,9 @@ public class Card {
 		return type;
 	}
 	public boolean equals(){
-		return false; //returning temp ------------------------------------------------------
+		return false; //currently not in use
+		//accessing board for card equivalency tests instead
+		//may use at a future date
 	}
 	public void setRoomInitial(String s){
 		roomInitial = s;

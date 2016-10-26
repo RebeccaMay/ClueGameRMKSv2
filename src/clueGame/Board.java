@@ -30,6 +30,7 @@ public class Board {
 	private int peopleCounter = 0;
 	private int weaponCounter = 0;
 	private int roomCounter = 0;
+	private Solution sol = new Solution();
 	// ctor is private to ensure only one can be created
 	private Board() {
 		adjMtx = new HashMap<BoardCell, HashSet<BoardCell>>();
@@ -292,7 +293,6 @@ public class Board {
 		Random rand = new Random();
 		int n = rand.nextInt(newDeck.size());
 
-		Solution sol = new Solution();
 		boolean personSelected = false;
 		boolean weaponSelected = false;
 		boolean roomSelected = false;
@@ -346,16 +346,16 @@ public class Board {
 			if(i == accuserIndex) counter++;
 			if(counter == 2) return null;	//if we get back to the accuser, counter will equal two and no one can disprove
 			if(i == accuserIndex && (playersInPlay.get(i).disproveSuggestion(s) != null)) return null;	//if accuser can disprove
-			
 			if(null != playersInPlay.get(i).disproveSuggestion(s)) return (playersInPlay.get(i).disproveSuggestion(s));
-			
-		
 		}
 		return null;
 	}
 	
 	public boolean checkAccusation(Solution accusation){
-		return false; //-------------------------------------------RETURNING TEMP
+		if(!accusation.room.equals(sol.room))return false;
+		if(!accusation.person.equals(sol.person))return false;
+		if(!accusation.weapon.equals(sol.weapon))return false;
+		return true; 
 	}
 	
 	
@@ -386,5 +386,16 @@ public class Board {
 	public int getRoomCounter(){
 		return roomCounter;
 	}
-
+	public Solution getSolution(){
+		return sol;
+	}
+	public void setSolName(String name){
+		sol.person = name;
+	}
+	public void setSolRoom(String r){
+		sol.room = r;
+	}
+	public void setSolWeapon(String w){
+		sol.weapon = w;
+	}
 }

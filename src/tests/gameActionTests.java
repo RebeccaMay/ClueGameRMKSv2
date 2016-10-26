@@ -126,11 +126,11 @@ public class gameActionTests {
 	public void checkAccusationTest(){
 		ComputerPlayer testPlayer = new ComputerPlayer();
 		//set solution
-		Solution sol = new Solution();
-		sol.person = "Matt Damon";
-		sol.room = "Neptune";
-		sol.weapon = "Candlestick";
-	
+		Solution solution = board.getSolution();
+		board.setSolName("Matt Damon");
+		board.setSolRoom("Neptune");
+		board.setSolWeapon("Candlestick");
+		//setting what cards player has seen and only leaving one out of each category so player will return correct solution
 		testPlayer.addToCardsSeen(board.getFullDeck().get(0));
 		testPlayer.addToCardsSeen(board.getFullDeck().get(1));
 		testPlayer.addToCardsSeen(board.getFullDeck().get(2));
@@ -154,30 +154,19 @@ public class gameActionTests {
 		testPlayer.makeAccusation();
 		//solution with all correct people
 		Solution acc = testPlayer.getAccusation();
-		assertTrue(acc.person.equals(sol.person));
-		assertTrue(acc.room.equals(sol.room));
-		assertTrue(acc.weapon.equals(sol.weapon));
-		
-		sol.person = "Wall-E";
+		assertTrue(board.checkAccusation(testPlayer.getAccusation()));
+		//solution includes a person they have seen (guess incorrect)
+		board.setSolName("Wall-E");
+		assertFalse(board.checkAccusation(testPlayer.getAccusation()));
+		//solution includes a weapon they have seen (guess incorrect)
+		board.setSolName("Matt Damon");
+		board.setSolWeapon("The Void");
+		assertFalse(board.checkAccusation(testPlayer.getAccusation()));
+		//solution includes a room they have seen (guess incorrect)
+		board.setSolWeapon("Candlestick");
+		board.setSolRoom("Jupiter");
 		acc = testPlayer.getAccusation();
-		assertFalse(acc.person.equals(sol.person));
-		assertTrue(acc.room.equals(sol.room));
-		assertTrue(acc.weapon.equals(sol.weapon));
-		
-		sol.person = "Matt Damon";
-		sol.weapon = "The Void";
-		acc = testPlayer.getAccusation();
-		assertTrue(acc.person.equals(sol.person));
-		assertTrue(acc.room.equals(sol.room));
-		assertFalse(acc.weapon.equals(sol.weapon));
-		
-		sol.weapon = "Candlestick";
-		sol.room = "Jupiter";
-		acc = testPlayer.getAccusation();
-		assertTrue(acc.person.equals(sol.person));
-		assertFalse(acc.room.equals(sol.room));
-		assertTrue(acc.weapon.equals(sol.weapon));
-		
+		assertFalse(board.checkAccusation(testPlayer.getAccusation()));
 	}
 	
 	//disprove a suggestion
