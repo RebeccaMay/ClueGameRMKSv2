@@ -230,10 +230,10 @@ public class gameActionTests {
 		testC2.addCardtoDeck(board.getFullDeck().get(20));
 		testC2.addCardtoDeck(board.getFullDeck().get(9));
 		
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(testHuman);		//id to make accuser: 0
-		players.add(testC1);		//id to make accuser: 1
-		players.add(testC2);		//id to make accuser: 2
+		board.getPlayersInPlay().clear();
+		board.addToPlayersInPlay(testHuman);		//id to make accuser: 0
+		board.addToPlayersInPlay(testC1);		//id to make accuser: 1
+		board.addToPlayersInPlay(testC2);		//id to make accuser: 2
 		
 		//Create solution that no one can disprove, no players have the following cards
 		testSuggestion.person = "ET";

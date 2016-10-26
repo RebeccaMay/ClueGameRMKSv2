@@ -339,9 +339,19 @@ public class Board {
 	//functions for game actions ------------------------------------------------------
 	public void selectAnswer(){}
 	
-	public Card handleSuggestion(Solution s){ //----------------------------------------------------------------------RETURNS TEMP
-		Card temp = new Card();
-		return temp;
+	public Card handleSuggestion(Solution s){
+		int accuserIndex = s.id;
+		int counter = 0; //counter keeps track of number of times we hit accuserIndex
+		for(int i = accuserIndex; i < playersInPlay.size(); i = (i + 1) % playersInPlay.size()){
+			if(i == accuserIndex) counter++;
+			if(counter == 2) return null;	//if we get back to the accuser, counter will equal two and no one can disprove
+			if(i == accuserIndex && (playersInPlay.get(i).disproveSuggestion(s) != null)) return null;	//if accuser can disprove
+			
+			if(null != playersInPlay.get(i).disproveSuggestion(s)) return (playersInPlay.get(i).disproveSuggestion(s));
+			
+		
+		}
+		return null;
 	}
 	
 	public boolean checkAccusation(Solution accusation){
@@ -363,6 +373,9 @@ public class Board {
 	
 	public ArrayList<Player> getPlayersInPlay(){
 		return playersInPlay;
+	}
+	public void addToPlayersInPlay(Player p){
+		playersInPlay.add(p);
 	}
 	public int getPeopleCounter(){
 		return peopleCounter;
