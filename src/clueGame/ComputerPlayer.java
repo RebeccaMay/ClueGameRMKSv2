@@ -44,7 +44,7 @@ public class ComputerPlayer extends Player {
 		}
 	}
 	
-	public void makeAccusation(){//-------------------------------------------------------------------------------------
+	public void makeAccusation(){
 		board = Board.getInstance();
 		ArrayList<Card> peopleNotSeen = new ArrayList<Card>();
 		ArrayList<Card> weaponNotSeen = new ArrayList<Card>();
