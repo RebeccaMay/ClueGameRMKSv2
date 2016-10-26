@@ -45,7 +45,9 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public void makeAccusation(){//-------------------------------------------------------------------------------------
-		//get name of room for board cell at current location
+		//create solution object in make accusation function
+				//if everything is good, returns true
+				//otherwise returns false
 		
 	}
 	

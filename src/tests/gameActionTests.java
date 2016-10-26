@@ -120,23 +120,64 @@ public class gameActionTests {
 		assert(count3 > 1);
 	}
 	//checking an accusation
-	@Test
+	/*@Test
 	public void checkAccusationTest(){
-		//ComputerPlayer testPlayer = new ComputerPlayer();
-		
+		ComputerPlayer testPlayer = new ComputerPlayer();
 		//set solution
-		//Solution sol = new Solution();
-		//sol.person = "Marvin the Martian";
-		//sol.room = "Jupiter";
-		//sol.weapon = "Candlestick";
-		//call makeAccusation
-		//testPlayer.makeAccusation();
-		//check against solution
-		//assertEquals(sol.person, testPlayer.getAccusation().person);
-		//assertEquals(sol.weapon, testPlayer.getAccusation().weapon);
-		//assertEquals(sol.room, testPlayer.getAccusation().room);
-	}
+		Solution sol = new Solution();
+		sol.person = "Matt Damon";
+		sol.room = "Neptune";
+		sol.weapon = "Candlestick";
 	
+		testPlayer.addToCardsSeen(board.getFullDeck().get(0));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(1));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(2));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(3));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(4));
+		
+		testPlayer.addToCardsSeen(board.getFullDeck().get(6));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(7));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(8));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(9));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(10));
+		
+		testPlayer.addToCardsSeen(board.getFullDeck().get(12));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(13));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(14));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(15));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(16));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(17));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(18));
+		testPlayer.addToCardsSeen(board.getFullDeck().get(19));
+		testPlayer.makeAccusation();
+		//solution with all correct people
+		Solution acc = testPlayer.getAccusation();
+		assertTrue(acc.person.equals(sol.person));
+		assertTrue(acc.room.equals(sol.room));
+		assertTrue(acc.weapon.equals(sol.weapon));
+		
+		sol.person = "Wall-E";
+		acc = testPlayer.getAccusation();
+		assertFalse(acc.person.equals(sol.person));
+		assertTrue(acc.room.equals(sol.room));
+		assertTrue(acc.weapon.equals(sol.weapon));
+		
+		sol.person = "Matt Damon";
+		sol.weapon = "The Void";
+		acc = testPlayer.getAccusation();
+		assertTrue(acc.person.equals(sol.person));
+		assertTrue(acc.room.equals(sol.room));
+		assertFalse(acc.weapon.equals(sol.weapon));
+		
+		sol.weapon = "CandleStick";
+		sol.room = "Jupiter";
+		acc = testPlayer.getAccusation();
+		assertTrue(acc.person.equals(sol.person));
+		assertFalse(acc.room.equals(sol.room));
+		assertTrue(acc.weapon.equals(sol.weapon));
+		
+	}
+	*/
 	//disprove a suggestion
 	@Test
 	public void disproveSuggestionTest(){
@@ -157,8 +198,9 @@ public class gameActionTests {
 		testSuggestion.person = "Buzz Lightyear"; //person card matches
 		testSuggestion.weapon = "The Void"; //weapon card matches
 		testSuggestion.room = "Saturn";
+		String sugg = testPlayer.disproveSuggestion(testSuggestion).getCardName();
 		
-		assertTrue((testSuggestion.person.equals(testPlayer.disproveSuggestion(testSuggestion).getCardName())) || (testSuggestion.weapon.equals(testPlayer.disproveSuggestion(testSuggestion).getCardName())));
+		assertTrue((sugg.equals(testSuggestion.person)) || (sugg.equals(testSuggestion.weapon)));
 		
 		//player has no matching cards
 		testSuggestion.person = "Marvin the Martian"; 
@@ -167,7 +209,12 @@ public class gameActionTests {
 				
 		assertTrue(testPlayer.disproveSuggestion(testSuggestion) == null);
 	}
+	
 	//handling a suggestion
+	@Test
+	public void handleSuggestionTest(){
+		
+	}
 	
 	//creating a suggestion
 	@Test
