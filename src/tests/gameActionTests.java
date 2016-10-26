@@ -138,7 +138,35 @@ public class gameActionTests {
 	}
 	
 	//disprove a suggestion
-	
+	@Test
+	public void disproveSuggestionTest(){
+		Player testPlayer = new Player();
+		Solution testSuggestion = new Solution();
+		//one player showing a card to disprove if they can
+		testPlayer.addCardtoDeck(board.getFullDeck().get(0)); 
+		testPlayer.addCardtoDeck(board.getFullDeck().get(10));
+		testPlayer.addCardtoDeck(board.getFullDeck().get(18));
+		
+		testSuggestion.person = "Buzz Lightyear"; //person card matches
+		testSuggestion.weapon = "CandleStick";
+		testSuggestion.room = "Saturn";
+		
+		assertTrue(testSuggestion.person.equals(testPlayer.disproveSuggestion(testSuggestion).getCardName()));
+		
+		//player has more than one matching card
+		testSuggestion.person = "Buzz Lightyear"; //person card matches
+		testSuggestion.weapon = "The Void"; //weapon card matches
+		testSuggestion.room = "Saturn";
+		
+		assertTrue((testSuggestion.person.equals(testPlayer.disproveSuggestion(testSuggestion).getCardName())) || (testSuggestion.weapon.equals(testPlayer.disproveSuggestion(testSuggestion).getCardName())));
+		
+		//player has no matching cards
+		testSuggestion.person = "Marvin the Martian"; 
+		testSuggestion.weapon = "Candlestick"; 
+		testSuggestion.room = "Saturn";
+				
+		assertTrue(testPlayer.disproveSuggestion(testSuggestion) == null);
+	}
 	//handling a suggestion
 	
 	//creating a suggestion
