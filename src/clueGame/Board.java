@@ -339,7 +339,10 @@ public class Board {
 	//functions for game actions ------------------------------------------------------
 	public void selectAnswer(){}
 	
-	//public Card handleSuggestion(){}
+	public Card handleSuggestion(Solution s){ //----------------------------------------------------------------------RETURNS TEMP
+		Card temp = new Card();
+		return temp;
+	}
 	
 	public boolean checkAccusation(Solution accusation){
 		return false; //-------------------------------------------RETURNING TEMP

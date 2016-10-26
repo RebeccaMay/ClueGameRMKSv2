@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.junit.BeforeClass;
@@ -10,6 +11,7 @@ import org.junit.Test;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -213,6 +215,36 @@ public class gameActionTests {
 	//handling a suggestion
 	@Test
 	public void handleSuggestionTest(){
+		Solution testSuggestion = new Solution();
+		
+		//generate players and their decks
+		HumanPlayer testHuman = new HumanPlayer();
+		testHuman.addCardtoDeck(board.getFullDeck().get(0));
+		testHuman.addCardtoDeck(board.getFullDeck().get(16));
+		
+		ComputerPlayer testC1 = new ComputerPlayer();
+		testC1.addCardtoDeck(board.getFullDeck().get(3));
+		testC1.addCardtoDeck(board.getFullDeck().get(8));
+		
+		ComputerPlayer testC2 = new ComputerPlayer();
+		testC2.addCardtoDeck(board.getFullDeck().get(20));
+		testC2.addCardtoDeck(board.getFullDeck().get(9));
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(testHuman);
+		players.add(testC2);
+		players.add(testC2);
+		
+		//Create solution that no one can disprove, no players have the following cards
+		testSuggestion.person = "ET";
+		testSuggestion.weapon = "Black Hole";
+		testSuggestion.room = "Mercury";
+		
+		assertEquals(null, board.handleSuggestion(testSuggestion));
+		
+		//Suggestion only accusing player can disprove, returns null (C1 will be accusing player)
+		testSuggestion.person = "Wall-E";		//How do we figure out who the accuser is???
+		
 		
 	}
 	
