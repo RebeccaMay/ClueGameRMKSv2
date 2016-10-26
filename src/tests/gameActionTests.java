@@ -146,7 +146,7 @@ public class gameActionTests {
 	public void createSuggestionTest(){
 		ComputerPlayer testPlayer = new ComputerPlayer();
 		Solution testSuggestion = new Solution();
-		testSuggestion = testPlayer.createSuggestion();
+		
 		
 		//room matches current location
 		assertEquals(testSuggestion.room, testPlayer.getCurrentRoom());
@@ -157,6 +157,8 @@ public class gameActionTests {
 		testPlayer.addToCardsSeen(board.getFullDeck().get(2));
 		testPlayer.addToCardsSeen(board.getFullDeck().get(3));
 		testPlayer.addToCardsSeen(board.getFullDeck().get(4)); //the 6th card, Matt Damon, has not been seen
+		//System.out.println(testPlayer.getCardsSeen());
+		testSuggestion = testPlayer.createSuggestion();
 		assertEquals("Matt Damon", testSuggestion.person);
 		
 		//if only one person not seen, it is selected
@@ -165,6 +167,7 @@ public class gameActionTests {
 		testPlayer.addToCardsSeen(board.getFullDeck().get(8));
 		testPlayer.addToCardsSeen(board.getFullDeck().get(9));
 		testPlayer.addToCardsSeen(board.getFullDeck().get(10)); //the 11th card, Candlestick, has not been seen
+		testSuggestion = testPlayer.createSuggestion();
 		assertEquals("Candlestick", testSuggestion.weapon);
 		
 		//if multiple people not seen, randomly selected
@@ -182,23 +185,22 @@ public class gameActionTests {
 		int count9= 0;
 		int count10= 0;
 		int count11= 0;
-		
+
 		for(int i = 0; i < 300; i++){
-			if(testSuggestion.person == "Wall-E") count3++;
-			if(testSuggestion.person == "Niel Armstrong") count4++;
-			if(testSuggestion.person == "Matt Damon") count5++;
-			if(testSuggestion.weapon == "Meteor Strike") count9++;
-			if(testSuggestion.weapon == "The Void") count10++;
-			if(testSuggestion.weapon == "Candlestick") count11++;
+			testSuggestion = testPlayer.createSuggestion();
+			//System.out.println(testSuggestion.person);
+			if(testSuggestion.person.equals("Wall-E")) count3++;
+			if(testSuggestion.person.equals("Neil Armstrong")) count4++;
+			if(testSuggestion.person.equals("Matt Damon")) count5++;
+			if(testSuggestion.weapon.equals("Meteor Strike")) count9++;
+			if(testSuggestion.weapon.equals("The Void")) count10++;
+			if(testSuggestion.weapon.equals("Candlestick")) count11++;
 		}
-		
 		assert(count3 > 1);
 		assert(count4 > 1);
 		assert(count5 > 1);
 		assert(count9 > 1);
 		assert(count10 > 1);
 		assert(count11 > 1);
-		
-			
 	}
 }

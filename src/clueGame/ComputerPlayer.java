@@ -9,6 +9,10 @@ public class ComputerPlayer extends Player {
 	private ArrayList<BoardCell> roomsVisited = new ArrayList<BoardCell>();
 	private ArrayList<Card> cardsSeen = new ArrayList<Card>();
 	private Solution accusation = new Solution();
+	private String currentRoom = "";
+	private static Board board;
+	
+	
 	public BoardCell pickLocation(Set<BoardCell> targets){ 
 		ArrayList<BoardCell> targetArray = new ArrayList<BoardCell>();
 		for(BoardCell target : targets){
@@ -46,7 +50,56 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public Solution createSuggestion(){
-		Solution s = new Solution(); //------------------------------------------------------------------------------------
+		board = Board.getInstance();
+		ArrayList<Card> peopleNotSeen = new ArrayList<Card>();
+		ArrayList<Card> weaponNotSeen = new ArrayList<Card>();
+		Solution s = new Solution(); 
+		Random r = new Random();
+		
+		//room must be room player is currently in
+		BoardCell currentCell = board.getCellAt(playerRow, playerCol);
+		char cellInitial = currentCell.getInitial();
+		for (int i = 0; i < board.getFullDeck().size(); i++){
+			if (board.getFullDeck().get(i).getRoomInitial() == String.valueOf(cellInitial)){
+				s.room = board.getFullDeck().get(i).getCardName();
+				currentRoom = board.getFullDeck().get(i).getCardName();
+			}
+		}
+		
+		//find which people and weapons have not been seen
+		for (int i = 0; i < board.getFullDeck().size(); i++){
+			if (!cardsSeen.contains(board.getFullDeck().get(i))){
+				//System.out.println(i);
+				if(board.getFullDeck().get(i).getCardType() == CardType.PERSON){
+					peopleNotSeen.add(board.getFullDeck().get(i));
+				}
+				if(board.getFullDeck().get(i).getCardType() == CardType.WEAPON){
+					weaponNotSeen.add(board.getFullDeck().get(i));
+				}
+			}			
+		}
+		//System.out.println(peopleNotSeen.toString());
+		//System.out.println(weaponNotSeen.toString());
+		//if only one weapon unseen, must choose the unseen weapon
+		if(weaponNotSeen.size() == 1){
+			s.weapon = weaponNotSeen.get(0).getCardName();
+		}
+		//otherwise, choose weapon randomly
+		else{
+			int n = r.nextInt(weaponNotSeen.size());
+			s.weapon = weaponNotSeen.get(n).getCardName();
+		}
+		
+		//if only one person unseen, must choose the unseen person
+		if(peopleNotSeen.size() == 1){
+			s.person = peopleNotSeen.get(0).getCardName();
+		}
+		//otherwise, choose person randomly
+		else{
+			int n = r.nextInt(peopleNotSeen.size());
+			s.person = peopleNotSeen.get(n).getCardName();
+		}
+		
 		return s;
 	}
 	
@@ -58,11 +111,15 @@ public class ComputerPlayer extends Player {
 	public Solution getAccusation(){
 		return accusation;
 	}
+	public ArrayList<Card> getCardsSeen(){
+		return cardsSeen;
+	}
 
-	public String getCurrentRoom() {//-------------------------------------------------------------------------------------------
-		return "hello";
+	public String getCurrentRoom() {
+		return currentRoom;
 	}
 	public void addToCardsSeen(Card c){
+		//System.out.println(c.getCardName());
 		cardsSeen.add(c);
 	}
 	public void removeFromCardsSeen(Card c){	//Function purely for use in testing
