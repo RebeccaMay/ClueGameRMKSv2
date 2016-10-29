@@ -336,8 +336,7 @@ public class Board {
 		
 	}
 
-	//functions for game actions ------------------------------------------------------
-	public void selectAnswer(){}
+	public void selectAnswer(){}//use in the future instead of creating solution in deal deck?
 	
 	public Card handleSuggestion(Solution s){
 		int accuserIndex = s.id;
@@ -357,11 +356,6 @@ public class Board {
 		if(!accusation.weapon.equals(sol.weapon))return false;
 		return true; 
 	}
-	
-	
-	
-	
-	//functions for game actions ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	
 	public ArrayList<Card> getFullDeck(){
 		return fullDeck;
