@@ -1,0 +1,53 @@
+0465504a46c5734affa54299444c4317f8ab37bd code cleaned up, comments added
+e9d185c116a6b1a22e5b46453374f71fa511ed80 all tests passinggit push origin mastergit push origin mastergit push origin master!
+683c463cde350ce5e1b133e096daf8957e046524 handle suggestion tests failing
+4573ca01b5139929dcd5e539fb0e5e60b2234f37 just in case
+aaed15afa035f35d2f5869ecad04e43ba712037b handle suggestion test in progress
+459e1368e7e10ea53fa8ca92275b2efc7229d038 check accusation tests passing
+ca6f4c5239b23cc0d294b27fcfb2494796f730ba check accusation tests failing
+d1725b349fbe081867f23a1e8408f9d3689a1614 disprove suggestion tests actually passing
+d09f593bb3ca1915429d1a9467c0256b4ebdd27d disprove suggestion tests passing
+d55dba5cb90e96270b104721670b6794400b0c01 disprove suggestion tests failing
+d8853886ccbb320ad28ba6f900671953c8219885 create suggestion tests passing
+c0c374e754c1c4c3066508d5ffaa0cd1161382b5 just added test file. create suggestion tests all failing.
+de1bfc34ddef4acc109c25225612ab3a1d38337d working on create suggestion
+004fc1e24dae1d6a97c11d595e77b93c06519adc selecting target location tests passing!
+015bfa7338eb9b6572906472926025808b32b166 test target locations failing
+b131328e074868d05372947535d316f7b83f1437 No rooms in targets failing test written
+369fe3246d39e5531a3db9b4a1cdd1969c491608 clue players 1 completed
+431b5da7b04b14b2d63172cd96864010058f6794 got rid of unnecessary print statements
+5db0d89615e535a2f77ce9cd89d8fbda7137b1ef ALL TESTS ACTUALLY PASSING!
+b39fe1ed5ec277b626ad3fd6d091482feef783d5 loadPeopleTest and dealingTest passing FOR REAL THIS TIME
+6645d0f28b76e2926785d594dd0192da6d0bfa2f added all files
+62443c9e39b25819413933a94541182c426a55d5 one last error to fix before tests are all passing
+363700fdf524f8ad36babe6e4a9c7290bdbfe513 dealing test written
+61eaba0822b042cb62b53e9a6603a21e16f5a405 comments
+20126577dedd2817d4408a9c7f57fa5463c3dfc2 first two tests passing
+22ddb30502e9cc7d32f2e6da6201f272adcf3256 both tests pass individually
+63199854ca7e1abc8ecc3284fbf731275b228570 Load card test failing, loadboardconfig being weird???
+dce01f0660af6432ce42403b588f08e39e8b597b having issues with color conversion
+c8461e48316ae9a66b06e51dc6e641131959265d FAILING TEST FOR LOADING PLAYERS
+86ac90fa9f9045ff0f3fff69086e2eb02a1037b1 just to be safe
+3231d332c8e447fa5f3b530ff33941fc214f6657 Had to start over. New player config file
+a1f13f579f8c614a28b5b412c7da6fdfe87791f6 Loading people test fails!
+8fbb969be22c8180bd04efd7bd237a506d9e6b38 added card config
+cab3093d66b683f680d7569d3f730fa306a59d97 added config files
+7eb5dcda958be724827c014190616fb647e240ff Shells of new player/card classes made
+514665f83f34c426f970d59a870b68628b73a2e5 Final Commit for clue board IV
+285280ad50101905d429940c9195ec41c29b4d8f Fixed target test (put recursive fxn into subfunction), all tests pass
+b18f72321cd1418fb9bb0c0dedeff787ece1d702 Passing adj and failing target tests
+821f358e950ff16500eb5d6536de927ae501e3cc Merge branch 'master' of https://github.com/coclayto/ClueGameCCDF
+1c8e3d1edb38f4fe12292a30e64e984a105cfeb7 Wrote failing tests
+24ff4301ab693a3441311fbadd75f75d9d8e6e2f Updated Layout
+db023292a099e89480dff47d67f69a709936086e Added layout and unfinished new tests
+86598114e237e5b4ac9b3d40ad4c48f1e7ecf7f9 Pass all tests for Board Init and handle exceptions
+c771adbde6d272339f2aca22c0a6ec24e9a7a2d9 Passed all tests
+816b7477e26ffa684fe034d16cc51fcd4ae72c9b Add files via upload
+95265582f0686e871eb4341e3f4add201b8f0595 Code compiles and fails tests
+45a80953fd7caaa6892884baca311f0a40152e38 Started writing clue board 1 tests and restructured some files
+97839f6cb195b1a0a48eb71b5f716de9f65b192d Add files via upload
+6e6ef3411aa3873709357e6a5cf74186bfa4b503 Added data folder
+b133d830735a1dcc0551edca7a5aa9e7a9023c09 Added files and most stubs for Clue Board 1
+ae8e6651e62ee7bf14d07e6147c8af68b84753ec Updated code so all tests pass
+cd226f097ecda7d4c4eddef1ac160b0d22b88008 Create README.md
+d99b15faf0b767d6bd0621662aa35b0e2ef2a089 Added Skeleton and Tests
